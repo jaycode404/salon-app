@@ -1,0 +1,12 @@
+.navlist-container {
+  display: flex;
+  gap: 1rem;
+}
+a {
+  color: white;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
