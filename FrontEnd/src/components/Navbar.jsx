@@ -8,7 +8,8 @@ export const NavList = ({}) => {
   const noLogged = ["Login", "Acerca de"];
   const navigate = useNavigate();
   const { isLoggedIn, logOut } = useContext(GeneralContext);
-  const [sesion, setSesion] = useState("");
+  
+  const [sesion, setSesion] = useState(Boolean(localStorage.getItem("accessToken")));
 
   useEffect(() => {
     setSesion(isLoggedIn);
@@ -56,7 +57,7 @@ export const NavList = ({}) => {
   );
 };
 export function Navbar() {
-  const userLoggedIn = true;
+  
   return (
     <nav>
       <Link to={"/"}>Logo</Link>

@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 export default function Menu() {
   const [citas, setCitas] = useState([]);
   const [users, setUsers] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   useEffect(() => {
     const getUsers = async () => {
       try {
         const res = await fetch("http://localhost:3000/menu", {
           method: "GET",
           headers: {
-             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             "Content-Type": "application/json",
           },
         });
@@ -18,9 +18,9 @@ export default function Menu() {
         if (res.ok) {
           const data = await res.json();
           setUsers(data);
-          console.log(data);
+          // console.log(data);
         } else {
-          navigate('/login')
+          navigate("/login");
           console.log("usuarios vacio");
         }
       } catch (err) {
