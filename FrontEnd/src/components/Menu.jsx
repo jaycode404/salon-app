@@ -18,7 +18,7 @@ export default function Menu() {
         if (res.ok) {
           const data = await res.json();
           setUsers(data);
-          // console.log(data);
+          console.log(data);
         } else {
           navigate("/login");
           console.log("usuarios vacio");
@@ -39,12 +39,14 @@ export default function Menu() {
         {users.length > 0 ? "Estas son tus usuarios" : "No hay usuarios..."}
       </h2>
       <div>
-        {users.map((i, user) => {
-          <div key={i}>
-            <p>{user.id}</p>
-            <p>{user.nombre}</p>
-            <p>{user.email}</p>
-          </div>;
+        {users.map((user) => {
+          return (
+            <div key={user.id}>
+              <p>{user.id}</p>
+              <p>{user.nombre}</p>
+              <p>{user.email}</p>
+            </div>
+          );
         })}
       </div>
     </div>

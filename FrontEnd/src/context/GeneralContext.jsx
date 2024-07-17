@@ -5,6 +5,9 @@ const GeneralContext = createContext();
 const GeneralProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const [sesion, setSesion] = useState(
+    Boolean(localStorage.getItem("accessToken"))
+  );
   const logIn = () => {
     setIsLoggedIn(true);
   };
@@ -14,6 +17,8 @@ const GeneralProvider = ({ children }) => {
   };
 
   const data = {
+    sesion, 
+    setSesion,
     isLoggedIn,
     logIn,
     logOut,

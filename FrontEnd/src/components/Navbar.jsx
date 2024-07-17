@@ -3,17 +3,12 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { GeneralContext } from "../context/GeneralContext";
 
-export const NavList = ({}) => {
-  const logged = ["Menu", "Agendar Cita"];
-  const noLogged = ["Login", "Acerca de"];
+export const NavList = () => {
+  const logged = ["Menu", "Agendar Cita", "Acerca De"];
+  const noLogged = ["Login", "Crear Cuenta", "Acerca de"];
   const navigate = useNavigate();
-  const { isLoggedIn, logOut } = useContext(GeneralContext);
-  
-  const [sesion, setSesion] = useState(Boolean(localStorage.getItem("accessToken")));
-
-  useEffect(() => {
-    setSesion(isLoggedIn);
-  }, [isLoggedIn]);
+  const { sesion, setSesion } = useContext(GeneralContext);
+  const token = localStorage.getItem("accessToken");
 
   const handleCerrarSesion = async () => {
     try {
@@ -25,16 +20,20 @@ export const NavList = ({}) => {
         },
       });
 
-      logOut();
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
+      setSesion(false);
       console.log("session cerrada");
-      console.log(isLoggedIn);
       navigate("/");
     } catch (err) {
       console.log(err, "no se pudo cerrar sesion");
     }
   };
+
+  useEffect(() => {
+    setSesion(Boolean(token));
+  }, [token]);
+
   return (
     <div className="navlist-container">
       {sesion ? (
@@ -48,7 +47,7 @@ export const NavList = ({}) => {
         </>
       ) : (
         noLogged.map((link, i) => (
-          <Link key={i} to={`/${link.toLocaleLowerCase().replace(/ /g, "-")}`}>
+          <Link key={i} to={`/${link.toLowerCase().replace(/ /g, "-")}`}>
             {link}
           </Link>
         ))
@@ -56,11 +55,12 @@ export const NavList = ({}) => {
     </div>
   );
 };
+
 export function Navbar() {
-  
+  const { sesion, setSesion } = useContext(GeneralContext);
   return (
     <nav>
-      <Link to={"/"}>Logo</Link>
+      <Link to={`${sesion ? "menu" : "/login"}`}>Logo</Link>
       <NavList />
     </nav>
   );

@@ -39,10 +39,8 @@ const authenticateJWT = (req, res, next) => {
   }
 };
 
-app.get("/", async (req, res) => {});
-
 //CREATE USER ////////////////////////////
-app.post("/create", async (req, res) => {
+app.post("/crear-cuenta", async (req, res) => {
   const { nombre, email, password } = req.body;
 
   try {
@@ -117,6 +115,15 @@ app.get("/menu", authenticateJWT, async (req, res) => {
   console.log(result);
 });
 
+//SERVICIOS////////////////////////////
+app.get("/servicios", async (req, res) => {
+  try {
+    const [servicios] = await pool.query(`SELECT * FROM servicios`);
+    res.status(200).json(servicios);
+  } catch (err) {
+    res.status(500).json({ message: "error al obtener los servicios" });
+  }
+});
 //LISTEN////////////////////////////
 app.listen(port, () => {
   console.log(`escuchando  en el puerto ${port}`);

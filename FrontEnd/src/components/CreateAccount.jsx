@@ -33,7 +33,7 @@ export default function CreateAccount() {
     const password = form.password;
     console.log(nombre, email, password);
     try {
-      const response = await fetch("http://localhost:3000/create", {
+      const response = await fetch("http://localhost:3000/crear-cuenta", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nombre, email, password }),
@@ -51,7 +51,7 @@ export default function CreateAccount() {
         });
         console.log("Registro exitoso", data);
         setTimeout(() => {
-          navigate("/menu");
+          navigate("/login");
         }, 1500);
       } else {
         Swal.fire({
