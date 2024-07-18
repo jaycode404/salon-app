@@ -41,12 +41,12 @@ const authenticateJWT = (req, res, next) => {
 
 //CREATE USER ////////////////////////////
 app.post("/crear-cuenta", async (req, res) => {
-  const { nombre, email, password } = req.body;
+  const { nombre, apellido, email, password, telefono } = req.body;
 
   try {
     const result = await pool.query(
-      "INSERT INTO usuarios (nombre, email, password) VALUES (?, ?, ?)",
-      [nombre, email, password]
+      "INSERT INTO usuarios (nombre, apellido, email, password, telefono) VALUES (?, ?, ?, ?,?)",
+      [nombre, apellido, email, password, telefono]
     );
     res.status(201).json({ message: "registro exitoso", result });
   } catch (err) {
@@ -129,12 +129,13 @@ app.get("/servicios", async (req, res) => {
 app.post("/crear-cita", async (req, res) => {
   try {
     const { fecha, hora, usuarioId } = req.body;
-    const result = await pool.query(
-      `INSERT INTO citas(fecha, hora, usuario_id) VALUES (?,?,?)`,
+    const [result] = await pool.query(
+      `INSERT INTO citas(fecha, hora, usuarioId) VALUES (?,?,?)`,
       [fecha, hora, usuarioId]
     );
-    const citaId = result.insertId;
-    res.send({ citaId });
+    const citaId = await result.insertId;
+    console.log(result)
+    res.status(200).json({citaId });
   } catch (err) {
     res.status(400).send({ message: "error en la coneccion" });
   }
@@ -143,14 +144,14 @@ app.post("/crear-cita", async (req, res) => {
 app.post("/citasservicios", async (req, res) => {
   try {
     const { citaId, servicios } = req.body;
-    const insertPromises = servicios.map((servicioId) => {
+    const insertPromises = servicios.map((servicio) => {
       return pool.query(
-        `INSERT INTO citasservicios(cita_id, servicio_id) VALUES(?,?)`,
-        [citaId, servicioId]
+        `INSERT INTO citasservicios(citaId, servicioId) VALUES (?,?)`,
+        [citaId, servicio]
       );
     });
-    const result = await Promise.all(insertPromises);
-    res.send(result);
+    await Promise.all(insertPromises);
+    res.status(201).json({message: 'servicios insertados correctamente'});
   } catch (err) {
     console.log("error al insertar servicios", err);
   }

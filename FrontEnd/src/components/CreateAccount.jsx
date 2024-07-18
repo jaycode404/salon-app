@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 const formInitial = {
   nombre: "",
+  apellido: "",
   email: "",
   password: "",
+  telefono: "",
 };
 
 export default function CreateAccount() {
@@ -28,15 +30,11 @@ export default function CreateAccount() {
     e.preventDefault();
     console.log("submiting");
 
-    const nombre = form.nombre;
-    const email = form.email;
-    const password = form.password;
-    console.log(nombre, email, password);
     try {
       const response = await fetch("http://localhost:3000/crear-cuenta", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nombre, email, password }),
+        body: JSON.stringify(form),
       });
 
       const data = await response.json();
@@ -79,6 +77,10 @@ export default function CreateAccount() {
           <input onChange={handleChange} type="text" name="nombre" />
         </div>
         <div>
+          <label htmlFor="apellido">Apellido:</label>
+          <input onChange={handleChange} type="text" name="apellido" />
+        </div>
+        <div>
           <label htmlFor="email">email:</label>
           <input onChange={handleChange} type="email" name="email" />
         </div>
@@ -86,6 +88,11 @@ export default function CreateAccount() {
           <label htmlFor="password">Password:</label>
           <input onChange={handleChange} type="password" name="password" />
         </div>
+        <div>
+          <label htmlFor="telefono">Telefono:</label>
+          <input onChange={handleChange} type="tel" name="telefono" />
+        </div>
+
         <button type="submit">Create Account</button>
       </form>
     </div>

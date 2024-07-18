@@ -24,6 +24,7 @@ export default function Agendar() {
       usuarioId: user.id,
     });
     console.log(form);
+    console.log(carrito);
   };
 
   //handleSubmit
@@ -43,8 +44,8 @@ export default function Agendar() {
       }
 
       const dataCita = await response.json();
-      const citaId = dataCita.citaId;
-      console.log(dataCita);
+      const { citaId } = dataCita;
+      console.log(citaId);
 
       const dataCitaServicios = {
         citaId,
@@ -67,10 +68,11 @@ export default function Agendar() {
         throw new Error("error al insertar servicios");
       }
 
-      const dataServicios = await responseServicios.json();
-      console.log(dataServicios);
-
       //errores handle
+      setForm(initialForm);
+      setCarrito([]);
+      setCarritoBox([]);
+      setTotal(0);
     } catch (err) {
       console.log("error en la coneccion");
     }
@@ -96,14 +98,14 @@ export default function Agendar() {
   const addCarrito = (id) => {
     console.log(id);
 
-    const servicio = servicios.find((servicio) => id === servicio.servicio_id);
+    const servicio = servicios.find((servicio) => id === servicio.id);
 
     if (
       servicio &&
       !carritoBox.includes(servicio) &&
       !carrito.includes(servicio)
     ) {
-      setCarrito([...carrito, servicio.servicio_id]);
+      setCarrito([...carrito, servicio.id]);
       setCarritoBox([...carritoBox, servicio]);
       console.log(servicio);
       console.log(carrito);
@@ -112,7 +114,7 @@ export default function Agendar() {
 
   //QUITAR DE CARRITO
   const quitar = (id) => {
-    const newCarrito = carritoBox.filter((item) => item.servicio_id !== id);
+    const newCarrito = carritoBox.filter((item) => item.id !== id);
 
     setCarritoBox(newCarrito);
   };
@@ -133,13 +135,13 @@ export default function Agendar() {
         <h3>Servicios</h3>
         <p>Elije tus servicios</p>
         <div className="servicios-container">
-          {servicios.map((servicio) => {
+          {servicios.map((servicio, i) => {
             return (
               <ServicioCard
+                key={i}
                 quitar={quitar}
                 servicio={servicio}
                 addCarrito={addCarrito}
-                key={servicio.servicio_id}
               />
             );
           })}
@@ -151,10 +153,10 @@ export default function Agendar() {
         <h4>total: ${total}</h4>
         <p>aqui tus servicios incluidos en tu cita</p>
         <div className="carrito-container">
-          {carritoBox.map((servicio, i) => {
+          {carritoBox.map((servicio, index) => {
             return (
               <ServicioCard
-                key={i}
+                key={index}
                 servicio={servicio}
                 addCarrito={addCarrito}
                 quitar={quitar}

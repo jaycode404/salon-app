@@ -16,16 +16,22 @@ export default function ServicioCard({ servicio, addCarrito, quitar }) {
       ref={cardRef}
       className="servicio-card"
       onClick={() => {
-        addCarrito(servicio.servicio_id);
+        addCarrito(servicio.id);
       }}
     >
-      <p>{servicio.servicio_id}</p>
+      <p>{servicio.id}</p>
       <p>{servicio.nombre}</p>
       <p>${servicio.precio}</p>
 
       {parentCarrito && (
         <div>
-          <button onClick={() => {quitar(servicio.servicio_id)}}>Quitar</button>
+          <button
+            onClick={() => {
+              quitar(servicio.id);
+            }}
+          >
+            Quitar
+          </button>
         </div>
       )}
     </div>
