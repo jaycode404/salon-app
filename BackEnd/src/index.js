@@ -76,7 +76,7 @@ app.post("/login", async (req, res) => {
         { expiresIn: "7d" }
       );
 
-      res.json({ accessToken, refreshToken });
+      res.json({ accessToken, refreshToken, user });
     } else {
       res.status(404).json({ message: "datos incorrectos" });
     }
@@ -123,6 +123,11 @@ app.get("/servicios", async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: "error al obtener los servicios" });
   }
+});
+
+//CREAR-CITA////////////////////////////
+app.post("/crear-cita", async (req, res) => {
+  const result = await pool.query(`INSERT INTO citas(fecha, hora, usuario_id)`);
 });
 //LISTEN////////////////////////////
 app.listen(port, () => {

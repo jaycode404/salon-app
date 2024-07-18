@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { GeneralContext } from "../context/GeneralContext";
 export default function Menu() {
   const [citas, setCitas] = useState([]);
   const [users, setUsers] = useState([]);
+  const { user, loading } = useContext(GeneralContext);
   const navigate = useNavigate();
   useEffect(() => {
     const getUsers = async () => {
@@ -18,7 +20,6 @@ export default function Menu() {
         if (res.ok) {
           const data = await res.json();
           setUsers(data);
-          console.log(data);
         } else {
           navigate("/login");
           console.log("usuarios vacio");
@@ -33,7 +34,8 @@ export default function Menu() {
   return (
     <div>
       <h2>Menú</h2>
-      {/* {citas.length > 0 ? "Estas son tus citas" : "No hay citas..."} */}
+      {!loading ? <i>USUARIO: {user.nombre}</i> : <i>Cargando usuario...</i>}
+
       <h2>
         {" "}
         {users.length > 0 ? "Estas son tus usuarios" : "No hay usuarios..."}
