@@ -127,7 +127,33 @@ app.get("/servicios", async (req, res) => {
 
 //CREAR-CITA////////////////////////////
 app.post("/crear-cita", async (req, res) => {
-  const result = await pool.query(`INSERT INTO citas(fecha, hora, usuario_id)`);
+  try {
+    const { fecha, hora, usuarioId } = req.body;
+    const result = await pool.query(
+      `INSERT INTO citas(fecha, hora, usuario_id) VALUES (?,?,?)`,
+      [fecha, hora, usuarioId]
+    );
+    const citaId = result.insertId;
+    res.send({ citaId });
+  } catch (err) {
+    res.status(400).send({ message: "error en la coneccion" });
+  }
+});
+//CREAR SERVICIOS////////////////////////
+app.post("/citasservicios", async (req, res) => {
+  try {
+    const { citaId, servicios } = req.body;
+    const insertPromises = servicios.map((servicioId) => {
+      return pool.query(
+        `INSERT INTO citasservicios(cita_id, servicio_id) VALUES(?,?)`,
+        [citaId, servicioId]
+      );
+    });
+    const result = await Promise.all(insertPromises);
+    res.send(result);
+  } catch (err) {
+    console.log("error al insertar servicios", err);
+  }
 });
 //LISTEN////////////////////////////
 app.listen(port, () => {

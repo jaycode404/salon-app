@@ -11,7 +11,7 @@ const initialForm = {
 export default function Agendar() {
   const [servicios, setServicios] = useState([]);
   const [carrito, setCarrito] = useState([]);
-  const [carritoBox, setCarritoBox] = useState(carrito);
+  const [carritoBox, setCarritoBox] = useState([]);
   let [total, setTotal] = useState(0);
   const [form, setForm] = useState(initialForm);
   const { user } = useContext(GeneralContext);
@@ -24,28 +24,53 @@ export default function Agendar() {
       usuarioId: user.id,
     });
     console.log(form);
-    
   };
 
   //handleSubmit
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      //POST EN CITAS
       const response = await fetch("http://localhost:3000/crear-cita", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          ...form,
-        }),
+        body: JSON.stringify(form),
       });
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-      } else {
-        console.log("error al crear la cita");
+      if (!response.ok) {
+        throw new Error("error al crear la cita");
       }
+
+      const dataCita = await response.json();
+      const citaId = dataCita.citaId;
+      console.log(dataCita);
+
+      const dataCitaServicios = {
+        citaId,
+        servicios: carrito,
+      };
+
+      //POST EN CITASERVICIOS
+      const responseServicios = await fetch(
+        "http://localhost:3000/citasservicios",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataCitaServicios),
+        }
+      );
+
+      if (!responseServicios.ok) {
+        throw new Error("error al insertar servicios");
+      }
+
+      const dataServicios = await responseServicios.json();
+      console.log(dataServicios);
+
+      //errores handle
     } catch (err) {
       console.log("error en la coneccion");
     }
@@ -73,8 +98,13 @@ export default function Agendar() {
 
     const servicio = servicios.find((servicio) => id === servicio.servicio_id);
 
-    if (servicio && !carrito.includes(servicio)) {
-      setCarrito([...carrito, servicio]);
+    if (
+      servicio &&
+      !carritoBox.includes(servicio) &&
+      !carrito.includes(servicio)
+    ) {
+      setCarrito([...carrito, servicio.servicio_id]);
+      setCarritoBox([...carritoBox, servicio]);
       console.log(servicio);
       console.log(carrito);
     }
@@ -82,19 +112,19 @@ export default function Agendar() {
 
   //QUITAR DE CARRITO
   const quitar = (id) => {
-    const newCarrito = carrito.filter((item) => item.servicio_id !== id);
+    const newCarrito = carritoBox.filter((item) => item.servicio_id !== id);
 
-    setCarrito(newCarrito);
+    setCarritoBox(newCarrito);
   };
 
   //CALCULAR TOTAL
   useEffect(() => {
-    const total = carrito.reduce(
+    const total = carritoBox.reduce(
       (sum, servicio) => sum + parseFloat(servicio.precio),
       0
     );
     setTotal(total);
-  }, [carrito]);
+  }, [carritoBox]);
 
   return (
     <div>
@@ -121,9 +151,10 @@ export default function Agendar() {
         <h4>total: ${total}</h4>
         <p>aqui tus servicios incluidos en tu cita</p>
         <div className="carrito-container">
-          {carrito.map((servicio) => {
+          {carritoBox.map((servicio, i) => {
             return (
               <ServicioCard
+                key={i}
                 servicio={servicio}
                 addCarrito={addCarrito}
                 quitar={quitar}
