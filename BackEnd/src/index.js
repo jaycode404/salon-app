@@ -110,10 +110,53 @@ app.post("/refresh-token", (req, res) => {
 });
 
 //MENU ////////////////////////////
-app.get("/menu", authenticateJWT, async (req, res) => {
-  const [result] = await pool.query(`SELECT * FROM usuarios`);
-  res.send(result);
-  console.log(result);
+app.post("/menu", authenticateJWT, async (req, res) => {
+  try {
+    const { usuarioId } = req.body;
+    const [result] = await pool.query(
+      `SELECT 
+        c.id AS citaId,
+        c.fecha,
+        c.hora,
+        s.id AS servicioId,
+        s.nombre AS servicioNombre,
+        s.precio AS servicioPrecio
+        FROM 
+        citas c 
+      INNER JOIN 
+        citasservicios cs ON c.id = cs.citaId
+      INNER JOIN
+        servicios s ON cs.servicioId = s.id
+      WHERE 
+        c.usuarioId = ?`,
+      [usuarioId]
+    );
+
+    const citas = result.reduce((acc, row) => {
+      const citaIndex = acc.findIndex((cita) => cita.citaId === row.citaId);
+      const servicio = {
+        servicioId: row.servicioId,
+        servicioNombre: row.servicioNombre,
+        servicioPrecio: row.servicioPrecio,
+      };
+
+      if (citaIndex === -1) {
+        acc.push({
+          citaId: row.citaId,
+          fecha: row.fecha,
+          hora: row.hora,
+          servicios: [servicio],
+        });
+      } else {
+        acc[citaIndex].servicios.push(servicio);
+      }
+      return acc;
+    }, []);
+    
+    res.status(200).send(citas);
+  } catch (err) {
+    res.status(500).send({ message: "error en la coneccion" });
+  }
 });
 
 //SERVICIOS////////////////////////////
@@ -135,8 +178,8 @@ app.post("/crear-cita", async (req, res) => {
       [fecha, hora, usuarioId]
     );
     const citaId = await result.insertId;
-    console.log(result)
-    res.status(200).json({citaId });
+    console.log(result);
+    res.status(200).json({ citaId });
   } catch (err) {
     res.status(400).send({ message: "error en la coneccion" });
   }
@@ -152,7 +195,7 @@ app.post("/citasservicios", async (req, res) => {
       );
     });
     await Promise.all(insertPromises);
-    res.status(201).json({message: 'servicios insertados correctamente'});
+    res.status(201).json({ message: "servicios insertados correctamente" });
   } catch (err) {
     console.log("error al insertar servicios", err);
   }

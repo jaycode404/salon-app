@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import ServicioCard from "./ServicioCard";
 import { GeneralContext } from "../context/GeneralContext";
-
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 const initialForm = {
   fecha: "",
   hora: "",
@@ -14,7 +15,8 @@ export default function Agendar() {
   const [carritoBox, setCarritoBox] = useState([]);
   let [total, setTotal] = useState(0);
   const [form, setForm] = useState(initialForm);
-  const { user } = useContext(GeneralContext);
+  const { user, loading } = useContext(GeneralContext);
+  const navigate = useNavigate();
 
   //handleChange
   const handleChange = (e) => {
@@ -30,6 +32,25 @@ export default function Agendar() {
   //handleSubmit
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (carrito.length === 0) {
+      Swal.fire({
+        title: "Agrega al menos un servicio al carrito",
+        icon: "warning",
+      });
+      return;
+    } else if (form.fecha === "") {
+      Swal.fire({
+        title: "Debes seleccionar una fecha",
+        icon: "warning",
+      });
+      return;
+    } else if (form.hora === "") {
+      Swal.fire({
+        title: "Debes seleccionar una hora",
+        icon: "warning",
+      });
+      return;
+    }
     try {
       //POST EN CITAS
       const response = await fetch("http://localhost:3000/crear-cita", {
@@ -43,6 +64,13 @@ export default function Agendar() {
         throw new Error("error al crear la cita");
       }
 
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Cita creada correctamente!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       const dataCita = await response.json();
       const { citaId } = dataCita;
       console.log(citaId);
@@ -73,6 +101,11 @@ export default function Agendar() {
       setCarrito([]);
       setCarritoBox([]);
       setTotal(0);
+      setTimeout(() => {
+        if (loading == false) {
+          navigate("/menu");
+        }
+      }, 1500);
     } catch (err) {
       console.log("error en la coneccion");
     }

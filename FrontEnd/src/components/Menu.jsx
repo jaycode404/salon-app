@@ -1,35 +1,43 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GeneralContext } from "../context/GeneralContext";
+import Swal from "sweetalert2";
 export default function Menu() {
   const [citas, setCitas] = useState([]);
-  const [users, setUsers] = useState([]);
   const { user, loading } = useContext(GeneralContext);
   const navigate = useNavigate();
+
   useEffect(() => {
-    const getUsers = async () => {
+    const getCitas = async () => {
+      if (loading) return;
       try {
         const res = await fetch("http://localhost:3000/menu", {
-          method: "GET",
+          method: "POST",
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             "Content-Type": "application/json",
           },
+          body: JSON.stringify({ usuarioId: user.id }),
         });
 
         if (res.ok) {
           const data = await res.json();
-          setUsers(data);
+          setCitas(data);
+          // console.log(citas);
         } else {
-          navigate("/login");
-          console.log("usuarios vacio");
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "no se encontraron citas!",
+          });
+          console.log("citas vacio");
         }
       } catch (err) {
-        console.log(err);
+        console.log(err, "error en la coneccion");
       }
     };
-    getUsers();
-  }, []);
+    getCitas();
+  }, [loading, user.id]);
 
   return (
     <div>
@@ -38,15 +46,30 @@ export default function Menu() {
 
       <h2>
         {" "}
-        {users.length > 0 ? "Estas son tus usuarios" : "No hay usuarios..."}
+        {citas.length > 0 ? "Estas son tus citas" : "No tienes citas..."}
       </h2>
-      <div>
-        {users.map((user) => {
+      <div className="citas-container">
+        {citas.map((cita) => {
           return (
-            <div key={user.id}>
-              <p>{user.id}</p>
-              <p>{user.nombre}</p>
-              <p>{user.email}</p>
+            <div className="cita-card" key={cita.citaId}>
+              <div>
+                {/* <p>Cita Id: {cita.id}</p> */}
+                <p>FECHA: {cita.fecha}</p>
+                <p>HORA: {cita.hora}</p>
+              </div>
+              <div className="cita-servicios">
+                <h4>Estos son tus servicios:</h4>
+                <div>
+                  {cita.servicios.map((servicio) => {
+                    return (
+                      <div key={servicio.servicioId}>
+                        <p>{servicio.servicioNombre}</p>
+                        <p>${servicio.servicioPrecio}</p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
           );
         })}
