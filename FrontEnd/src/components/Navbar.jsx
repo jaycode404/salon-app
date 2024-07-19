@@ -7,8 +7,7 @@ export const NavList = () => {
   const logged = ["Menu", "Agendar Cita", "Acerca De"];
   const noLogged = ["Login", "Crear Cuenta", "Acerca de"];
   const navigate = useNavigate();
-  const { sesion, setSesion } = useContext(GeneralContext);
-  const token = localStorage.getItem("accessToken");
+  const { user, logOut } = useContext(GeneralContext);
 
   const handleCerrarSesion = async () => {
     try {
@@ -20,9 +19,7 @@ export const NavList = () => {
         },
       });
 
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
-      setSesion(false);
+      logOut();
       console.log("session cerrada");
       navigate("/");
     } catch (err) {
@@ -30,13 +27,9 @@ export const NavList = () => {
     }
   };
 
-  useEffect(() => {
-    setSesion(Boolean(token));
-  }, [token]);
-
   return (
     <div className="navlist-container">
-      {sesion ? (
+      {user !== null ? (
         <>
           {logged.map((link, i) => (
             <Link key={i} to={`/${link.toLowerCase().replace(/ /g, "-")}`}>
@@ -57,10 +50,10 @@ export const NavList = () => {
 };
 
 export function Navbar() {
-  const { sesion, setSesion } = useContext(GeneralContext);
+  const { user } = useContext(GeneralContext);
   return (
     <nav>
-      <Link to={`${sesion ? "menu" : "/login"}`}>Logo</Link>
+      <Link to={`${user !== null ? "menu" : "/login"}`}>Logo</Link>
       <NavList />
     </nav>
   );

@@ -84,6 +84,7 @@ app.post("/login", async (req, res) => {
     res.status(404).json({ message: "Usuario no encontrado" });
   }
 });
+
 //LOGOUT////////////////////
 app.post("/logout", (req, res) => {
   res.json({ message: "Sesion, cerrada" });

@@ -10,7 +10,7 @@ const formInitial = {
 export default function Login() {
   const [form, setForm] = useState(formInitial);
   const navigate = useNavigate();
-  const { user, setUser, isLoggedIn, logIn } = useContext(GeneralContext);
+  const { user, logIn } = useContext(GeneralContext);
 
   //handleChange
   const handleChange = (e) => {
@@ -39,11 +39,12 @@ export default function Login() {
       const data = await response.json();
 
       if (response.ok) {
-        localStorage.setItem("user", JSON.stringify(data.user));
-        localStorage.setItem("accessToken", data.accessToken);
-        localStorage.setItem("refreshToken", data.refreshToken);
-
-        logIn();
+        const dataSesion = {
+          user: data.user,
+          accessToken: data.accessToken,
+          refreshToken: data.refreshToken,
+        };
+        logIn(dataSesion);
         Swal.fire({
           position: "center",
           icon: "success",

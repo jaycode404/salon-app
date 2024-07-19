@@ -3,11 +3,8 @@ import React, { createContext, useEffect, useState } from "react";
 const GeneralContext = createContext();
 
 const GeneralProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
-  const [sesion, setSesion] = useState(
-    Boolean(localStorage.getItem("accessToken"))
-  );
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -21,24 +18,26 @@ const GeneralProvider = ({ children }) => {
     console.log(user); // Para observar cambios en el estado user
   }, [user]);
 
-  const logIn = () => {
-    setIsLoggedIn(true);
+  const logIn = (dataSesion) => {
+    localStorage.setItem("user", JSON.stringify(dataSesion.user));
+    localStorage.setItem("accessToken", dataSesion.accessToken);
+    localStorage.setItem("refreshToken", dataSesion.refreshToken);
+    setUser(dataSesion.user);
   };
 
   const logOut = () => {
-    setIsLoggedIn(false);
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("user");
+    setUser(null);
   };
 
   const data = {
     loading,
     user,
     setUser,
-    sesion,
-    setSesion,
-    isLoggedIn,
     logIn,
     logOut,
-    setIsLoggedIn,
   };
 
   return (
