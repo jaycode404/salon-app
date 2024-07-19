@@ -17,16 +17,93 @@ export default function Agendar() {
   const [form, setForm] = useState(initialForm);
   const { user, loading } = useContext(GeneralContext);
   const navigate = useNavigate();
+  //FORMATEAR FECHA
+  const formatFecha = (fecha) => {
+    const [year, month, day] = fecha.split("-");
+    return `${year}-${month}-${day}`;
+  };
+  //get cita a comparar
+  const getCitas = async (fecha) => {
+    try {
+      const response = await fetch(`http://localhost:3000/citas/${fecha}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-  //handleChange
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-      usuarioId: user.id,
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        console.log("solicitud fallida");
+        return [];
+      }
+    } catch (err) {
+      console.log("fecha y hora ocupados");
+      return [];
+    }
+  };
+
+  //VALIDAR HORARIO
+  const validarHorario = async (fecha, hora) => {
+    const formatedFecha = formatFecha(fecha);
+    const citas = await getCitas(formatedFecha);
+  
+    // Convertir la hora del formulario a minutos
+    const [formHoraHoras, formHoraMinutos] = hora.split(":").map(Number);
+    const formHoraEnMinutos = formHoraHoras * 60 + formHoraMinutos;
+  
+    const margin = 20; // 20 minutos
+  
+    const citasEmpalmadas = citas.filter((cita) => {
+      const existingCitaDate = new Date(cita.fecha);
+      const existingCitaFecha = existingCitaDate.toISOString().split("T")[0];
+      const existingCitaHora = cita.hora;
+  
+      if (existingCitaFecha !== formatedFecha) {
+        return false;
+      }
+  
+      // Convertir la hora de la cita existente a minutos
+      const [existingHoraHoras, existingHoraMinutos] = existingCitaHora.split(":").map(Number);
+      const existingHoraEnMinutos = existingHoraHoras * 60 + existingHoraMinutos;
+  
+      // Comparar las diferencias entre las horas en minutos
+      return Math.abs(existingHoraEnMinutos - formHoraEnMinutos) < margin;
     });
-    console.log(form);
-    console.log(carrito);
+  
+    return citasEmpalmadas.length > 0;
+  };
+  
+  //handleChange
+  const handleChange = async (e) => {
+    const { name, value } = e.target;
+    const newForm = {
+      ...form,
+      [name]: value,
+      usuarioId: user.id,
+    };
+    setForm(newForm);
+  
+    if (name === "hora") {
+      if (form.fecha) {
+        const horarioOcupado = await validarHorario(form.fecha, value);
+        if (horarioOcupado) {
+          Swal.fire({
+            icon: "error",
+            title: "Hora no disponible",
+            text: "Esta hora está ocupada o demasiado cerca de otra cita.",
+          });
+        } else {
+          Swal.fire({
+            icon: "success",
+            title: "Hora disponible",
+            text: "Esta hora está disponible!",
+          });
+        }
+      }
+    }
   };
 
   //handleSubmit

@@ -152,10 +152,23 @@ app.post("/menu", authenticateJWT, async (req, res) => {
       }
       return acc;
     }, []);
-    
+
     res.status(200).send(citas);
   } catch (err) {
     res.status(500).send({ message: "error en la coneccion" });
+  }
+});
+//HORARIO DISPONIBLE////////////////////////////
+app.get("/citas/:fecha", async (req, res) => {
+  try {
+    const { fecha } = req.params;
+    const [result] = await pool.query(`SELECT * FROM citas WHERE fecha = ?`, [
+      fecha,
+    ]);
+    res.status(200).json(result);
+    console.log(result)
+  } catch (err) {
+    res.status(500).json({ message: "error en la coneccion" });
   }
 });
 
