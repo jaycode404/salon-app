@@ -110,7 +110,7 @@ app.post("/refresh-token", (req, res) => {
 });
 
 //MENU ////////////////////////////
-app.post("/menu", authenticateJWT, async (req, res) => {
+app.post("/menu", async (req, res) => {
   try {
     const { usuarioId } = req.body;
     const [result] = await pool.query(

@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Header from "./components/Header";
 import { Navbar } from "./components/Navbar";
 import Login from "./components/Login";
@@ -24,6 +24,7 @@ function App() {
         <Route path="/acerca-de" element={<AcercaDe />} />
         <Route path="/crear-cuenta" element={<CreateAccount />} />
         <Route path="/login" element={<Home />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </>
   );

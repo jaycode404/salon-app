@@ -9,7 +9,7 @@ export default function Menu() {
 
   useEffect(() => {
     const getCitas = async () => {
-      if (loading) return;
+      
       try {
         const res = await fetch("http://localhost:3000/menu", {
           method: "POST",

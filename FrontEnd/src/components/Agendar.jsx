@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import ServicioCard from "./ServicioCard";
 import { GeneralContext } from "../context/GeneralContext";
 import Swal from "sweetalert2";
+import { parse, isAfter } from "date-fns";
 import { useNavigate } from "react-router-dom";
 const initialForm = {
   fecha: "",
@@ -17,7 +18,7 @@ export default function Agendar() {
   const [form, setForm] = useState(initialForm);
   const { user, loading } = useContext(GeneralContext);
   const navigate = useNavigate();
-  //FORMATEAR FECHA
+  //FORMATEAR FECHA////////////////////////////
   const formatFecha = (fecha) => {
     const [year, month, day] = fecha.split("-");
     return `${year}-${month}-${day}`;
@@ -45,55 +46,104 @@ export default function Agendar() {
     }
   };
 
-  //VALIDAR HORARIO
+  //VALIDAR HORARIO///////////////////////////
   const validarHorario = async (fecha, hora) => {
     const formatedFecha = formatFecha(fecha);
     const citas = await getCitas(formatedFecha);
-  
-    // Convertir la hora del formulario a minutos
+
     const [formHoraHoras, formHoraMinutos] = hora.split(":").map(Number);
     const formHoraEnMinutos = formHoraHoras * 60 + formHoraMinutos;
-  
-    const margin = 20; // 20 minutos
-  
+
+    const margin = 20;
+
     const citasEmpalmadas = citas.filter((cita) => {
       const existingCitaDate = new Date(cita.fecha);
       const existingCitaFecha = existingCitaDate.toISOString().split("T")[0];
       const existingCitaHora = cita.hora;
-  
+
       if (existingCitaFecha !== formatedFecha) {
         return false;
       }
-  
-      // Convertir la hora de la cita existente a minutos
-      const [existingHoraHoras, existingHoraMinutos] = existingCitaHora.split(":").map(Number);
-      const existingHoraEnMinutos = existingHoraHoras * 60 + existingHoraMinutos;
-  
-      // Comparar las diferencias entre las horas en minutos
+
+      const [existingHoraHoras, existingHoraMinutos] = existingCitaHora
+        .split(":")
+        .map(Number);
+      const existingHoraEnMinutos =
+        existingHoraHoras * 60 + existingHoraMinutos;
+
       return Math.abs(existingHoraEnMinutos - formHoraEnMinutos) < margin;
     });
-  
+
     return citasEmpalmadas.length > 0;
   };
-  
-  //handleChange
+
+  //validar fecha//////////////////////////////
+  const fechaValida = (fecha) => {
+    const fechaSeleccionada = parse(fecha, "yyyy-MM-dd", new Date());
+    const ahora = new Date();
+    ahora.setHours(0, 0, 0, 0);
+    fechaSeleccionada.setHours(5, 5, 5, 5);
+    if (isAfter(fechaSeleccionada, ahora)) {
+      console.log("Fecha válida");
+      return true;
+    } else {
+      console.log("Fecha no válida");
+      return false;
+    }
+  };
+
+  //hora valida//////////////////////////////
+  const horaValida = (fecha, hora) => {
+    const fechaSeleccionada = new Date(`${fecha}T${hora}:00`);
+    const ahora = new Date();
+
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+
+    if (fechaSeleccionada.toDateString() === hoy.toDateString()) {
+      return fechaSeleccionada >= ahora;
+    }
+
+    return true;
+  };
+  //handleChange//////////////////////////////
   const handleChange = async (e) => {
     const { name, value } = e.target;
-    const newForm = {
+
+    setForm({
       ...form,
       [name]: value,
       usuarioId: user.id,
-    };
-    setForm(newForm);
-  
+    });
+
+    if (name === "fecha") {
+      const fechaValidada = fechaValida(value);
+      if (fechaValidada === false) {
+        Swal.fire({
+          icon: "error",
+          title: "Fecha no válida",
+          text: "La fecha seleccionada es anterior a hoy.",
+        });
+
+        return;
+      }
+    }
+
     if (name === "hora") {
       if (form.fecha) {
         const horarioOcupado = await validarHorario(form.fecha, value);
+        const horaValidada = horaValida(form.fecha, value);
         if (horarioOcupado) {
           Swal.fire({
             icon: "error",
             title: "Hora no disponible",
             text: "Esta hora está ocupada o demasiado cerca de otra cita.",
+          });
+        } else if (!horaValidada) {
+          Swal.fire({
+            icon: "error",
+            title: "Selecciona una hora valida",
+            text: "Esta hora es anterior a la actual...",
           });
         } else {
           Swal.fire({
@@ -106,10 +156,10 @@ export default function Agendar() {
     }
   };
 
-  //handleSubmit
+  //handleSubmit///////////////////////////////
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (carrito.length === 0) {
+    if (!carrito.length > 0) {
       Swal.fire({
         title: "Agrega al menos un servicio al carrito",
         icon: "warning",
@@ -129,7 +179,7 @@ export default function Agendar() {
       return;
     }
     try {
-      //POST EN CITAS
+      //POST EN CITAS/////////////////////////
       const response = await fetch("http://localhost:3000/crear-cita", {
         method: "POST",
         headers: {
@@ -157,7 +207,7 @@ export default function Agendar() {
         servicios: carrito,
       };
 
-      //POST EN CITASERVICIOS
+      //POST EN CITASERVICIOS//////////////////
       const responseServicios = await fetch(
         "http://localhost:3000/citasservicios",
         {
@@ -188,6 +238,7 @@ export default function Agendar() {
     }
   };
 
+  ///get SERVICIOS /////////////////////////////
   useEffect(() => {
     const getServicios = async () => {
       const respuesta = await fetch("http://localhost:3000/servicios", {
@@ -205,6 +256,7 @@ export default function Agendar() {
     getServicios();
   }, []);
 
+  ///ADD CARRITO /////////////////////////////
   const addCarrito = (id) => {
     console.log(id);
 
@@ -213,23 +265,27 @@ export default function Agendar() {
     if (
       servicio &&
       !carritoBox.includes(servicio) &&
-      !carrito.includes(servicio)
+      !carrito.includes(servicio.id)
     ) {
       setCarrito([...carrito, servicio.id]);
       setCarritoBox([...carritoBox, servicio]);
-      console.log(servicio);
+      console.log(carritoBox);
       console.log(carrito);
     }
   };
 
-  //QUITAR DE CARRITO
+  //QUITAR DE CARRITO///////////////////////////
   const quitar = (id) => {
-    const newCarrito = carritoBox.filter((item) => item.id !== id);
+    const newCarrito = carrito.filter((itemId) => itemId !== id);
+    const newCarritoBox = carritoBox.filter((item) => item.id !== id);
 
-    setCarritoBox(newCarrito);
+    setCarrito(newCarrito);
+    setCarritoBox(newCarritoBox);
+    console.log(carrito);
+    console.log(carritoBox);
   };
 
-  //CALCULAR TOTAL
+  //CALCULAR TOTAL///////////////////////////////
   useEffect(() => {
     const total = carritoBox.reduce(
       (sum, servicio) => sum + parseFloat(servicio.precio),
