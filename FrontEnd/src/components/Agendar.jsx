@@ -23,7 +23,7 @@ export default function Agendar() {
     const [year, month, day] = fecha.split("-");
     return `${year}-${month}-${day}`;
   };
-  //get cita a comparar
+  //get cita a comparar///////////////////////////
   const getCitas = async (fecha) => {
     try {
       const response = await fetch(`http://localhost:3000/citas/${fecha}`, {
@@ -50,33 +50,46 @@ export default function Agendar() {
   const validarHorario = async (fecha, hora) => {
     const formatedFecha = formatFecha(fecha);
     const citas = await getCitas(formatedFecha);
-
+  
     const [formHoraHoras, formHoraMinutos] = hora.split(":").map(Number);
     const formHoraEnMinutos = formHoraHoras * 60 + formHoraMinutos;
-
-    const margin = 20;
-
+  
+    const margin = 20; // Margen de tiempo en minutos
+    let proximaHoraDisponible = null; // Variable para almacenar la próxima hora disponible
+  
     const citasEmpalmadas = citas.filter((cita) => {
       const existingCitaDate = new Date(cita.fecha);
       const existingCitaFecha = existingCitaDate.toISOString().split("T")[0];
       const existingCitaHora = cita.hora;
-
-      if (existingCitaFecha !== formatedFecha) {
+  
+      if (existingCitaFecha !== formatedFecha && !fechaValida(formatedFecha)) {
         return false;
       }
-
+  
       const [existingHoraHoras, existingHoraMinutos] = existingCitaHora
         .split(":")
         .map(Number);
       const existingHoraEnMinutos =
         existingHoraHoras * 60 + existingHoraMinutos;
-
-      return Math.abs(existingHoraEnMinutos - formHoraEnMinutos) < margin;
+  
+      const isEmpalmada = Math.abs(existingHoraEnMinutos - formHoraEnMinutos) < margin;
+  
+      if (isEmpalmada) {
+        const proximaHora = existingHoraEnMinutos + margin;
+        const horas = Math.floor(proximaHora / 60).toString().padStart(2, '0');
+        const minutos = (proximaHora % 60).toString().padStart(2, '0');
+        proximaHoraDisponible = `${horas}:${minutos}`;
+      }
+  
+      return isEmpalmada;
     });
-
-    return citasEmpalmadas.length > 0;
+  
+    return {
+      horarioOcupado: citasEmpalmadas.length > 0,
+      proximaHoraDisponible,
+    };
   };
-
+  
   //validar fecha//////////////////////////////
   const fechaValida = (fecha) => {
     const fechaSeleccionada = parse(fecha, "yyyy-MM-dd", new Date());
@@ -109,13 +122,13 @@ export default function Agendar() {
   //handleChange//////////////////////////////
   const handleChange = async (e) => {
     const { name, value } = e.target;
-
+  
     setForm({
       ...form,
       [name]: value,
       usuarioId: user.id,
     });
-
+  
     if (name === "fecha") {
       const fechaValidada = fechaValida(value);
       if (fechaValidada === false) {
@@ -124,25 +137,24 @@ export default function Agendar() {
           title: "Fecha no válida",
           text: "La fecha seleccionada es anterior a hoy.",
         });
-
         return;
       }
     }
-
+  
     if (name === "hora") {
       if (form.fecha) {
-        const horarioOcupado = await validarHorario(form.fecha, value);
+        const { horarioOcupado, proximaHoraDisponible } = await validarHorario(form.fecha, value);
         const horaValidada = horaValida(form.fecha, value);
         if (horarioOcupado) {
           Swal.fire({
             icon: "error",
             title: "Hora no disponible",
-            text: "Esta hora está ocupada o demasiado cerca de otra cita.",
+            text: `Esta hora está ocupada, la hora más próxima disponible es ${proximaHoraDisponible}.`,
           });
         } else if (!horaValidada) {
           Swal.fire({
             icon: "error",
-            title: "Selecciona una hora valida",
+            title: "Selecciona una hora válida",
             text: "Esta hora es anterior a la actual...",
           });
         } else {
@@ -155,7 +167,6 @@ export default function Agendar() {
       }
     }
   };
-
   //handleSubmit///////////////////////////////
   const handleSubmit = async (e) => {
     e.preventDefault();

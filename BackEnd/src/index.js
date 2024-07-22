@@ -1,8 +1,8 @@
 import express from "express";
 import jwt from "jsonwebtoken";
+import bcrypt from 'bcrypt'
 import mysql from "mysql2";
 import { pool } from "./db.js";
-import bcryipt from "bcrypt";
 import cors from "cors";
 const app = express();
 const port = 3000;
@@ -44,9 +44,10 @@ app.post("/crear-cuenta", async (req, res) => {
   const { nombre, apellido, email, password, telefono } = req.body;
 
   try {
+    const hashedPassword = await bcrypt.hash(password, 10)
     const result = await pool.query(
       "INSERT INTO usuarios (nombre, apellido, email, password, telefono) VALUES (?, ?, ?, ?,?)",
-      [nombre, apellido, email, password, telefono]
+      [nombre, apellido, email, hashedPassword, telefono]
     );
     res.status(201).json({ message: "registro exitoso", result });
   } catch (err) {
@@ -63,8 +64,8 @@ app.post("/login", async (req, res) => {
 
   if (rows.length > 0) {
     const user = rows[0];
-    // const isMatch = await bcryipt.compare(password, user.password);
-    if (user.password === password) {
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (isMatch) {
       const accessToken = jwt.sign(
         { id: user.id, email: user.email },
         SECRET_KEY,
@@ -166,7 +167,7 @@ app.get("/citas/:fecha", async (req, res) => {
       fecha,
     ]);
     res.status(200).json(result);
-    console.log(result)
+    console.log(result);
   } catch (err) {
     res.status(500).json({ message: "error en la coneccion" });
   }
@@ -211,6 +212,22 @@ app.post("/citasservicios", async (req, res) => {
     res.status(201).json({ message: "servicios insertados correctamente" });
   } catch (err) {
     console.log("error al insertar servicios", err);
+  }
+});
+
+//CANCELAR CITA //////////////////////////////
+app.delete("/eliminar-cita/:id", async (req, res) => {
+  try {
+    const citaId = req.params.id;
+    const [result] = await pool.query(`DELETE FROM citas WHERE id = ?`, [citaId]);
+    if (result.affectedRows > 0) {
+      res.status(200).send({ message: "cita eliminada" });
+    } else {
+      res.status(400).send({ message: "no se elimino la cita" });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ message: "Error al eliminar la cita" });
   }
 });
 //LISTEN////////////////////////////
