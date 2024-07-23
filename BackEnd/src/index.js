@@ -113,7 +113,16 @@ app.post("/refresh-token", (req, res) => {
 //admin citas ////////////////////////////
 app.get("/admin", async (req, res) => {
   try {
-    const [result] = await pool.query(`SELECT * FROM citas`);
+    const [result] = await pool.query(`
+         SELECT
+          citas.id,
+          citas.fecha,
+          citas.hora,
+          usuarios.nombre,
+          usuarios.apellido
+          FROM citas
+          INNER JOIN usuarios ON citas.usuarioId = usuarios.id 
+      `);
     res.status(200).json(result);
   } catch (err) {
     res.status(400).send({ message: "" });

@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { GeneralContext } from "../context/GeneralContext";
+
 
 export default function AdminPanel() {
-  const [allCitas, setAllCitas] = useState([]);
 
+  const {cancelarCita, allCitas, setAllCitas, getAllCitas} = useContext(GeneralContext)
   const formatoFechaHora = (fechaISO, hora) => {
-    const opcionesFecha = { year: "numeric", month: "long", day: "numeric" };
+    const opcionesFecha = {weekday: 'long', year: "numeric", month: "long", day: "numeric" };
     const opcionesHora = { hour: "2-digit", minute: "2-digit" };
 
     const fecha = new Date(fechaISO);
@@ -18,68 +20,46 @@ export default function AdminPanel() {
     };
   };
 
-  // GET ALL CITAS ////////////////////////////
-  const getAllCitas = async () => {
-    console.log("trayendo todas las citas");
-
-    try {
-      const response = await fetch("http://localhost:3000/admin", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        // Ordenar citas por fecha y luego por hora
-        const citasOrdenadas = data
-          .map((cita) => {
-            // Verificar el formato de fecha y hora
-            if (!cita.fecha || !cita.hora) {
-              console.error("Fecha o hora inválida:", cita.fecha, cita.hora);
-              return null;
-            }
-            return cita;
-          })
-          .filter((cita) => cita !== null) // Filtrar citas inválidas
-          .sort((a, b) => {
-            const fechaA = new Date(a.fecha);
-            const fechaB = new Date(b.fecha);
-            if (fechaA.getTime() !== fechaB.getTime()) return fechaA - fechaB;
-            return (
-              new Date(`1970-01-01T${a.hora}`) -
-              new Date(`1970-01-01T${b.hora}`)
-            );
-          });
-
-        setAllCitas(citasOrdenadas);
-        console.log(citasOrdenadas);
-      } else {
-        console.log("no se encontraron citas");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
+ 
   useEffect(() => {
     getAllCitas();
   }, []);
 
+  const agruparCitasPorFecha = (citas) => {
+    const citasPorFecha = {};
+    citas.forEach((cita) => {
+      const { fecha } = formatoFechaHora(cita.fecha, cita.hora);
+      if (!citasPorFecha[fecha]) {
+        citasPorFecha[fecha] = [];
+      }
+      citasPorFecha[fecha].push(cita);
+    });
+    return citasPorFecha;
+  };
+
+  const citasPorFecha = agruparCitasPorFecha(allCitas);
   return (
     <div>
       <h2>Admin Panel</h2>
-      {allCitas.map((cita) => {
-        const { fecha, hora } = formatoFechaHora(cita.fecha, cita.hora);
-        return (
-          <div key={cita.id}>
-            <p>{fecha}</p>
-            <p>{hora}</p>
-            <p>{cita.usuarioId}</p>
+      <div className="citas-container">
+        {Object.keys(citasPorFecha).map((fecha) => (
+          <div key={fecha} className="fecha-group">
+            <h3>{fecha}</h3>
+            {citasPorFecha[fecha].map((cita) => {
+              const { hora } = formatoFechaHora(cita.fecha, cita.hora);
+              return (
+                <div key={cita.id} className="cita-card">
+                  <p>HORA: {hora}</p>
+                  <p>
+                    CLIENTE: {cita.nombre} {cita.apellido}
+                  </p>
+                  <button  onClick={() => {cancelarCita(cita.id)}}>Cancelar Cita</button>
+                </div>
+              );
+            })}
           </div>
-        );
-      })}
+        ))}
+      </div>
     </div>
   );
 }
