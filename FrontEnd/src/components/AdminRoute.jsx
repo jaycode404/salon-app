@@ -1,17 +1,21 @@
-import React, { useContext } from 'react'
-import { GeneralContext } from '../context/GeneralContext'
+import React, { useContext } from "react";
+import { Route, Navigate, Outlet } from "react-router-dom";
+import { GeneralContext } from "../context/GeneralContext";
 
-export default function AdminRoute() {
-    const {user, loading } = useContext(GeneralContext)
-
-    if(!loading){
-        {user.admin === 1 ? () : ()}
-
-        
-    }
+const AdminRoute = ({ path, ...props }) => {
+  const { user, loading } = useContext(GeneralContext);
+  if (loading) {
+    return <div>Cargando...</div>;
+  }
   return (
-    <div>
-      
-    </div>
-  )
-}
+    <>
+      {!loading && user !== null && user.admin === 1 ? (
+        <Outlet />
+      ) : (
+        <Navigate to="/login" />
+      )}
+    </>
+  );
+};
+
+export default AdminRoute;

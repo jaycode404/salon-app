@@ -5,6 +5,7 @@ import { GeneralContext } from "../context/GeneralContext";
 
 export const NavList = () => {
   const logged = ["Menu", "Agendar Cita", "Acerca De"];
+  const admin = ["Menu", "Agendar Cita", "Admin Panel"];
   const noLogged = ["Login", "Crear Cuenta", "Acerca de"];
   const navigate = useNavigate();
   const { user, logOut } = useContext(GeneralContext);
@@ -27,24 +28,19 @@ export const NavList = () => {
     }
   };
 
+  const getNavLinks = () => {
+    if (user) {
+      return user.admin === 1 ? admin : logged;
+    } else return noLogged;
+  };
   return (
     <div className="navlist-container">
-      {user !== null ? (
-        <>
-          {logged.map((link, i) => (
-            <Link key={i} to={`/${link.toLowerCase().replace(/ /g, "-")}`}>
-              {link}
-            </Link>
-          ))}
-          <button onClick={handleCerrarSesion}>cerrar sesion</button>
-        </>
-      ) : (
-        noLogged.map((link, i) => (
-          <Link key={i} to={`/${link.toLowerCase().replace(/ /g, "-")}`}>
-            {link}
-          </Link>
-        ))
-      )}
+      {getNavLinks().map((link, i) => (
+        <Link key={i} to={`/${link.toLowerCase().replace(/ /g, "-")}`}>
+          {link}
+        </Link>
+      ))}
+      {user && <button onClick={handleCerrarSesion}>Cerrar Sesión</button>}
     </div>
   );
 };

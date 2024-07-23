@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { GeneralContext } from "../context/GeneralContext";
+import { el } from "date-fns/locale";
 const formInitial = {
   email: "",
   password: "",
@@ -10,7 +11,7 @@ const formInitial = {
 export default function Login() {
   const [form, setForm] = useState(formInitial);
   const navigate = useNavigate();
-  const { user, logIn } = useContext(GeneralContext);
+  const { user, logIn, loading } = useContext(GeneralContext);
 
   //handleChange
   const handleChange = (e) => {
@@ -55,9 +56,12 @@ export default function Login() {
         console.log("login exitoso");
 
         console.log(user);
-        setTimeout(() => {
+
+        if (data.user.admin === 1) {
+          navigate("/admin");
+        } else {
           navigate("/menu");
-        }, 1500);
+        }
       } else {
         Swal.fire({
           icon: "error",
