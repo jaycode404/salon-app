@@ -1,6 +1,6 @@
 import express from "express";
 import jwt from "jsonwebtoken";
-import bcrypt from 'bcrypt'
+import bcrypt from "bcrypt";
 import mysql from "mysql2";
 import { pool } from "./db.js";
 import cors from "cors";
@@ -44,7 +44,7 @@ app.post("/crear-cuenta", async (req, res) => {
   const { nombre, apellido, email, password, telefono } = req.body;
 
   try {
-    const hashedPassword = await bcrypt.hash(password, 10)
+    const hashedPassword = await bcrypt.hash(password, 10);
     const result = await pool.query(
       "INSERT INTO usuarios (nombre, apellido, email, password, telefono) VALUES (?, ?, ?, ?,?)",
       [nombre, apellido, email, hashedPassword, telefono]
@@ -110,6 +110,15 @@ app.post("/refresh-token", (req, res) => {
   }
 });
 
+//admin citas ////////////////////////////
+app.get("/admin", async (req, res) => {
+  try {
+    const [result] = await pool.query(`SELECT * FROM citas`);
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(400).send({ message: "" });
+  }
+});
 //MENU ////////////////////////////
 app.post("/menu", async (req, res) => {
   try {
@@ -219,7 +228,9 @@ app.post("/citasservicios", async (req, res) => {
 app.delete("/eliminar-cita/:id", async (req, res) => {
   try {
     const citaId = req.params.id;
-    const [result] = await pool.query(`DELETE FROM citas WHERE id = ?`, [citaId]);
+    const [result] = await pool.query(`DELETE FROM citas WHERE id = ?`, [
+      citaId,
+    ]);
     if (result.affectedRows > 0) {
       res.status(200).send({ message: "cita eliminada" });
     } else {
