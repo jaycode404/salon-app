@@ -75,22 +75,24 @@ app.get("/confirmar-email", async (req, res) => {
   const { token } = req.query;
 
   try {
-    const [result] = pool.query(`SELECT * FROM usuarios WHERE token = ?`, [
-      token,
-    ]);
+    const [result] = await pool.query(
+      `SELECT * FROM usuarios WHERE token = ?`,
+      [token]
+    );
 
     if (result.length > 0) {
       const user = result[0];
-      await pool.query(
-        `UPDATE usuarios SET confirmado = 1, token = NULL WHERE id = ?`,
-        [user.id]
-      );
+      await pool.query(`UPDATE usuarios SET confirmado = 1`, [user.id]);
       res.status(200).json({ message: "Email confirmado" });
-    } else {
-      res.status(404).json({ message: "token no valido" });
+      await pool.query(`UPDATE usuarios SET token = NULL WHERE id = ?`, [
+        user.id,
+      ]);
     }
+    // } else {
+    //   res.status(404).json({ message: "token no valido" });
+    // }
   } catch (err) {
-    req.status(500).json({ message: "error en la coneccion" });
+    res.status(500).json({ message: "error en la coneccion" });
   }
 });
 //CREATE USER ////////////////////////////
@@ -98,6 +100,16 @@ app.post("/crear-cuenta", async (req, res) => {
   const { nombre, apellido, email, password, telefono } = req.body;
 
   try {
+    const [existingUser] = await pool.query(
+      `SELECT * FROM usuarios WHERE email = ?`,
+      [email]
+    );
+
+    if (existingUser.length > 0) {
+      // return console.log(existingUser)
+      return res.status(400).json({ message: "Este mail ya esta registrado" });
+    }
+
     const token = generateToken();
     const hashedPassword = await bcrypt.hash(password, 10);
 

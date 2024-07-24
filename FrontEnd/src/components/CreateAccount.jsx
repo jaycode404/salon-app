@@ -11,6 +11,7 @@ const formInitial = {
 
 export default function CreateAccount() {
   const [form, setForm] = useState(formInitial);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   //   useEffect(() => {
@@ -30,7 +31,16 @@ export default function CreateAccount() {
     e.preventDefault();
     console.log("submiting");
 
+    const loadingSwal = Swal.fire({
+      title: "Cargando...",
+      text: "Por favor, espere mientras procesamos su solicitud.",
+      showConfirmButton: false,
+      allowOutsideClick: false,
+      icon: loading,
+    });
+
     try {
+      setLoading(true);
       const response = await fetch("http://localhost:3000/crear-cuenta", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -40,26 +50,28 @@ export default function CreateAccount() {
       const data = await response.json();
 
       if (response.ok) {
+        loadingSwal.close();
         Swal.fire({
           position: "center",
           icon: "success",
           title: "Usuario registrado!",
-          showConfirmButton: false,
-          timer: 1500,
+          text: "Revisa tu email para confirmar tu cuenta e inicia sesion..",
+          showConfirmButton: true,
         });
         console.log("Registro exitoso", data);
         setTimeout(() => {
           navigate("/login");
         }, 1500);
       } else {
+        loadingSwal.close();
         Swal.fire({
           icon: "error",
-          title: "Oops...",
-          text: "Formato de datos incorrecto",
+          title: `${data.message}`,
         });
         console.log("login error", data);
       }
     } catch (err) {
+      loadingSwal.close();
       Swal.fire({
         icon: "error",
         title: "Oops...",

@@ -10,6 +10,7 @@ import Agendar from "./components/Agendar";
 import PrivateRoutes from "./components/PrivateRoutes";
 import AdminPanel from "./components/AdminPanel";
 import AdminRoute from "./components/AdminRoute";
+import ConfirmarEmail from "./components/ConfirmarEmail";
 function App() {
   return (
     <>
@@ -30,8 +31,8 @@ function App() {
         <Route path="/acerca-de" element={<AcercaDe />} />
         <Route path="/crear-cuenta" element={<CreateAccount />} />
         <Route path="/login" element={<Home />} />
-        <Route path="/confirmar-email" component={ConfirmarEmail} />
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="/confirmar-email" element={<ConfirmarEmail/>} />
+        {/* <Route path="*" element={<Navigate to="/" />} /> */}
       </Routes>
     </>
   );
