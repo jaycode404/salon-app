@@ -197,7 +197,8 @@ app.get("/admin", async (req, res) => {
           citas.fecha,
           citas.hora,
           usuarios.nombre,
-          usuarios.apellido
+          usuarios.apellido,
+          usuarios.telefono
           FROM citas
           INNER JOIN usuarios ON citas.usuarioId = usuarios.id 
       `);

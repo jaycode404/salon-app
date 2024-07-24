@@ -1,12 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { GeneralContext } from "../context/GeneralContext";
 
-
 export default function AdminPanel() {
-
-  const {cancelarCita, allCitas, setAllCitas, getAllCitas} = useContext(GeneralContext)
+  const { cancelarCita, allCitas, setAllCitas, getAllCitas } =
+    useContext(GeneralContext);
   const formatoFechaHora = (fechaISO, hora) => {
-    const opcionesFecha = {weekday: 'long', year: "numeric", month: "long", day: "numeric" };
+    const opcionesFecha = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
     const opcionesHora = { hour: "2-digit", minute: "2-digit" };
 
     const fecha = new Date(fechaISO);
@@ -20,7 +24,6 @@ export default function AdminPanel() {
     };
   };
 
- 
   useEffect(() => {
     getAllCitas();
   }, []);
@@ -46,6 +49,7 @@ export default function AdminPanel() {
           <div key={fecha} className="fecha-group">
             <h3>{fecha}</h3>
             {citasPorFecha[fecha].map((cita) => {
+              console.log(cita)
               const { hora } = formatoFechaHora(cita.fecha, cita.hora);
               return (
                 <div key={cita.id} className="cita-card">
@@ -53,7 +57,14 @@ export default function AdminPanel() {
                   <p>
                     CLIENTE: {cita.nombre} {cita.apellido}
                   </p>
-                  <button  onClick={() => {cancelarCita(cita.id)}}>Cancelar Cita</button>
+                  <p>Telefono: {cita.telefono}</p>
+                  <button
+                    onClick={() => {
+                      cancelarCita(cita.id);
+                    }}
+                  >
+                    Cancelar Cita
+                  </button>
                 </div>
               );
             })}

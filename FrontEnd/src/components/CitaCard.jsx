@@ -3,6 +3,7 @@ import { GeneralContext } from "../context/GeneralContext";
 import Swal from "sweetalert2";
 export default function CitaCard({ cita, formatFecha }) {
   const { cancelarCita } = useContext(GeneralContext);
+  const horaFormateada = cita.hora.split(":").slice(0, 2).join(":");
 
   return (
     <div className="cita-card">
@@ -10,7 +11,7 @@ export default function CitaCard({ cita, formatFecha }) {
         {/* <p>Cita Id: {cita.id}</p> */}
         <p>id: {cita.citaId}</p>
         <p>FECHA: {formatFecha}</p>
-        <p>HORA: {cita.hora}</p>
+        <p>HORA: {horaFormateada}</p>
       </div>
       <div className="cita-servicios">
         <h4>Estos son tus servicios:</h4>
