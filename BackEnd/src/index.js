@@ -1,9 +1,12 @@
 import express from "express";
 import jwt from "jsonwebtoken";
+import crypto from "crypto";
+import nodemailer from "nodemailer";
 import bcrypt from "bcrypt";
 import mysql from "mysql2";
 import { pool } from "./db.js";
 import cors from "cors";
+import { ca } from "date-fns/locale";
 const app = express();
 const port = 3000;
 ///////////////////////////////////////////
@@ -39,17 +42,75 @@ const authenticateJWT = (req, res, next) => {
   }
 };
 
+//GENERAR TOKEN ////////////////////////////
+const generateToken = () => {
+  return crypto.randomBytes(10).toString("hex").slice(0, 15);
+};
+//EMAIL CNFIG ////////////////////////////
+const sendConfirmationEmail = async (userEmail, token) => {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "jaycode404@gmail.com",
+      pass: "hziidbvtwfrgwkbt",
+    },
+  });
+
+  const mailOptions = {
+    from: "jaycode404@gmail.com",
+    to: userEmail,
+    subject: "Confirma tu Email",
+    text: `Por favor confirma tu email haciendo click en el siguiente enlace: http://localhost:5173/confirmar-email?token=${token}`,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log(`correo enviado a ${userEmail}`);
+  } catch (err) {
+    console.log("error al eviar correo", err);
+  }
+};
+//CONFIRMAR EMAIL ////////////////////////////
+app.get("/confirmar-email", async (req, res) => {
+  const { token } = req.query;
+
+  try {
+    const [result] = pool.query(`SELECT * FROM usuarios WHERE token = ?`, [
+      token,
+    ]);
+
+    if (result.length > 0) {
+      const user = result[0];
+      await pool.query(
+        `UPDATE usuarios SET confirmado = 1, token = NULL WHERE id = ?`,
+        [user.id]
+      );
+      res.status(200).json({ message: "Email confirmado" });
+    } else {
+      res.status(404).json({ message: "token no valido" });
+    }
+  } catch (err) {
+    req.status(500).json({ message: "error en la coneccion" });
+  }
+});
 //CREATE USER ////////////////////////////
 app.post("/crear-cuenta", async (req, res) => {
   const { nombre, apellido, email, password, telefono } = req.body;
 
   try {
+    const token = generateToken();
     const hashedPassword = await bcrypt.hash(password, 10);
+
     const result = await pool.query(
-      "INSERT INTO usuarios (nombre, apellido, email, password, telefono) VALUES (?, ?, ?, ?,?)",
-      [nombre, apellido, email, hashedPassword, telefono]
+      "INSERT INTO usuarios (nombre, apellido, email, password, telefono, confirmado, token) VALUES (?, ?, ?, ?, ?, 0, ?)",
+      [nombre, apellido, email, hashedPassword, telefono, token]
     );
-    res.status(201).json({ message: "registro exitoso", result });
+    await sendConfirmationEmail(email, token);
+    res.status(200).json({
+      message:
+        "Gracias por registrarte, revisa tu email para confirmarlo y luego inicia sesion, por favor",
+      result,
+    });
   } catch (err) {
     res.status(404).json({ message: "Error en el servidor", err });
   }
@@ -64,6 +125,11 @@ app.post("/login", async (req, res) => {
 
   if (rows.length > 0) {
     const user = rows[0];
+    if (user.confirmado === 0) {
+      return res.status(403).json({
+        message: "Por favor confirma tu email antes de iniciar sesion",
+      });
+    }
     const isMatch = await bcrypt.compare(password, user.password);
     if (isMatch) {
       const accessToken = jwt.sign(

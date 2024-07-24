@@ -30,6 +30,7 @@ function App() {
         <Route path="/acerca-de" element={<AcercaDe />} />
         <Route path="/crear-cuenta" element={<CreateAccount />} />
         <Route path="/login" element={<Home />} />
+        <Route path="/confirmar-email" component={ConfirmarEmail} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </>
