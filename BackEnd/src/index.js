@@ -60,12 +60,12 @@ const sendConfirmationEmail = async (userEmail, token) => {
     from: "jaycode404@gmail.com",
     to: userEmail,
     subject: "Confirma tu Email",
-    text: `Por favor confirma tu email haciendo click en el siguiente enlace: http://localhost:5173/confirmar-email?token=${token}`,
+    text: `Gracias por registrarte, por favor confirma tu email haciendo click en el siguiente enlace: http://localhost:5173/confirmar-email?token=${token}`,
   };
 
   try {
     await transporter.sendMail(mailOptions);
-    console.log(`correo enviado a ${userEmail}`);
+    // console.log(`correo enviado a ${userEmail}`);
   } catch (err) {
     console.log("error al eviar correo", err);
   }
@@ -263,7 +263,7 @@ app.get("/citas/:fecha", async (req, res) => {
       fecha,
     ]);
     res.status(200).json(result);
-    console.log(result);
+    // console.log(result);
   } catch (err) {
     res.status(500).json({ message: "error en la coneccion" });
   }
@@ -288,7 +288,7 @@ app.post("/crear-cita", async (req, res) => {
       [fecha, hora, usuarioId]
     );
     const citaId = await result.insertId;
-    console.log(result);
+    // console.log(result);
     res.status(200).json({ citaId });
   } catch (err) {
     res.status(400).send({ message: "error en la coneccion" });
@@ -330,5 +330,6 @@ app.delete("/eliminar-cita/:id", async (req, res) => {
 });
 //LISTEN////////////////////////////
 app.listen(port, () => {
-  console.log(`escuchando  en el puerto ${port}`);
+  // console.log(`escuchando  en el puerto ${port}`);
+  console.log(`conectado...`);
 });

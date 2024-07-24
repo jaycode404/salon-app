@@ -93,7 +93,7 @@ const GeneralProvider = ({ children }) => {
 
   const cancelarCita = async (id) => {
     Swal.fire({
-      title: "¿Desea cancelar su cita?",
+      title: "¿Desea cancelar la cita?",
       showDenyButton: true,
       denyButtonColor: "#17d036",
       confirmButtonText: "Sí, cancelar mi cita",

@@ -12,12 +12,15 @@ const formInitial = {
 export default function CreateAccount() {
   const [form, setForm] = useState(formInitial);
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  //   useEffect(() => {
-  //     console.log(form);
-  //   }, []);
-  //handleChange
+  //validar numero ///////////////////////////
+  const validatePhone = (phone) => {
+    const phoneRegex = /^\d{10}$/;
+    return phoneRegex.test(phone);
+  };
+  //HANDLECHANGE ////////////////////////////////
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -26,17 +29,27 @@ export default function CreateAccount() {
     console.log(form);
   };
 
-  //handleSubmit
+  //handleSubmit///////////////////////////////
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("submiting");
 
+    if (!validatePhone(form.telefono)) {
+      Swal.fire({
+        icon: "error",
+        title: "Número de teléfono inválido",
+        text: "El número de teléfono debe tener 10 dígitos.",
+      });
+      return;
+    }
     const loadingSwal = Swal.fire({
-      title: "Cargando...",
-      text: "Por favor, espere mientras procesamos su solicitud.",
+      html: `<div class="swal2-loading"></div>
+      <p>Estamos creando su cuenta...</p>`,
+      title: "Creando Usuario",
+
       showConfirmButton: false,
       allowOutsideClick: false,
-      icon: loading,
+      icon: "loading",
     });
 
     try {
@@ -80,6 +93,10 @@ export default function CreateAccount() {
       console.error("Fetch error: ", err);
     }
   };
+  //mostrar pssw /////////////////////
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   return (
     <div className="login-form-card">
       <h2>Crea una cuenta</h2>
@@ -98,7 +115,18 @@ export default function CreateAccount() {
         </div>
         <div>
           <label htmlFor="password">Password:</label>
-          <input onChange={handleChange} type="password" name="password" />
+          <input
+            onChange={handleChange}
+            type={showPassword ? "text" : "password"}
+            name="password"
+          />
+          <button
+            type="button"
+            onClick={togglePasswordVisibility}
+            style={{ marginLeft: "10px" }}
+          >
+            {showPassword ? "Ocultar" : "Mostrar"}
+          </button>
         </div>
         <div>
           <label htmlFor="telefono">Telefono:</label>
