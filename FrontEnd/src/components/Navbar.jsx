@@ -6,7 +6,7 @@ import { GeneralContext } from "../context/GeneralContext";
 export const NavList = () => {
   const logged = ["Menu", "Agendar Cita", "Acerca De"];
   const admin = ["Menu", "Agendar Cita", "Admin"];
-  const noLogged = ["Login", "Crear Cuenta", "Acerca de"];
+  const noLogged = ["Iniciar Sesión", "Crear Cuenta", "Acerca de"];
   const navigate = useNavigate();
   const { user, logOut } = useContext(GeneralContext);
 
@@ -48,8 +48,11 @@ export const NavList = () => {
 export function Navbar() {
   const { user } = useContext(GeneralContext);
   return (
-    <nav>
-      <Link to={`${user !== null ? "menu" : "/login"}`}>Logo</Link>
+    <nav className="nav-container">
+      <div className="logo-container">
+        <img className="logo-tijeras" src="/assets/tijeras.png" alt="" />
+        <Link to={`${user !== null ? "/menu" : "/login"}`}>SALON</Link>
+      </div>
       <NavList />
     </nav>
   );

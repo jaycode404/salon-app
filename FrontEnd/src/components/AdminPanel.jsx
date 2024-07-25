@@ -49,7 +49,6 @@ export default function AdminPanel() {
           <div key={fecha} className="fecha-group">
             <h3>{fecha}</h3>
             {citasPorFecha[fecha].map((cita) => {
-              console.log(cita)
               const { hora } = formatoFechaHora(cita.fecha, cita.hora);
               return (
                 <div key={cita.id} className="cita-card">

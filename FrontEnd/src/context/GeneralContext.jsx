@@ -16,7 +16,7 @@ const GeneralProvider = ({ children }) => {
     setLoading(false);
   }, []);
   useEffect(() => {
-    console.log(user); // Para observar cambios en el estado user
+    // console.log(user); // Para observar cambios en el estado user
   }, [user]);
 
   const getCitas = async () => {
@@ -48,7 +48,7 @@ const GeneralProvider = ({ children }) => {
   };
   // GET ALL CITAS ////////////////////////////
   const getAllCitas = async () => {
-    console.log("trayendo todas las citas");
+    // console.log("trayendo todas las citas");
 
     try {
       const response = await fetch("http://localhost:3000/admin", {
@@ -82,7 +82,7 @@ const GeneralProvider = ({ children }) => {
           });
 
         setAllCitas(citasOrdenadas);
-        console.log(citasOrdenadas);
+        // console.log(citasOrdenadas);
       } else {
         console.log("no se encontraron citas");
       }

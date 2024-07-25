@@ -26,7 +26,7 @@ export default function CreateAccount() {
       ...form,
       [e.target.name]: e.target.value,
     });
-    console.log(form);
+    // console.log(form);
   };
 
   //handleSubmit///////////////////////////////
@@ -78,7 +78,7 @@ export default function CreateAccount() {
       } else {
         loadingSwal.close();
         Swal.fire({
-          icon: "error",
+          icon: "warning",
           title: `${data.message}`,
         });
         console.log("login error", data);
@@ -98,43 +98,71 @@ export default function CreateAccount() {
     setShowPassword(!showPassword);
   };
   return (
-    <div className="login-form-card">
+    <section>
       <h2>Crea una cuenta</h2>
-      <form action="" onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="nombre">Nombre:</label>
-          <input onChange={handleChange} type="text" name="nombre" />
-        </div>
-        <div>
-          <label htmlFor="apellido">Apellido:</label>
-          <input onChange={handleChange} type="text" name="apellido" />
-        </div>
-        <div>
-          <label htmlFor="email">email:</label>
-          <input onChange={handleChange} type="email" name="email" />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            onChange={handleChange}
-            type={showPassword ? "text" : "password"}
-            name="password"
-          />
-          <button
-            type="button"
-            onClick={togglePasswordVisibility}
-            style={{ marginLeft: "10px" }}
-          >
-            {showPassword ? "Ocultar" : "Mostrar"}
-          </button>
-        </div>
-        <div>
-          <label htmlFor="telefono">Telefono:</label>
-          <input onChange={handleChange} type="tel" name="telefono" />
-        </div>
+      <div className="items-bg"></div>
+      <div className="create-form-card">
+        <form action="" onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="nombre">Nombre:</label>
+            <input
+              onChange={handleChange}
+              type="text"
+              name="nombre"
+              placeholder="Su nombre..."
+            />
+          </div>
+          <div>
+            <label htmlFor="apellido">Apellido:</label>
+            <input
+              onChange={handleChange}
+              type="text"
+              name="apellido"
+              placeholder="Su apellido"
+            />
+          </div>
+          <div>
+            <label htmlFor="email">E-mail:</label>
+            <input
+              onChange={handleChange}
+              type="email"
+              name="email"
+              placeholder="Su e-mail"
+            />
+          </div>
+          <div className="form-password-container">
+            <div>
+              <label htmlFor="password">Password:</label>
+              <input
+                onChange={handleChange}
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="Su password, asegure recordarlo"
+              />
+            </div>
+            <button
+              className="button button-black"
+              type="button"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? "Ocultar" : "Mostrar"}
+            </button>
+          </div>
+          <div>
+            <label htmlFor="telefono">Telefono:</label>
+            <input
+              onChange={handleChange}
+              type="tel"
+              name="telefono"
+              placeholder="Telefono principal de contacto"
+            />
+          </div>
 
-        <button type="submit">Create Account</button>
-      </form>
-    </div>
+          <button className="button button-green" type="submit">
+            crear cuenta
+          </button>
+        </form>
+      </div>
+    </section>
   );
 }

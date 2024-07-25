@@ -80,18 +80,22 @@ export default function Login() {
     }
   };
   return (
-    <div className="login-form-card">
-      <form action="" onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">email:</label>
-          <input onChange={handleChange} type="email" name="email" />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input onChange={handleChange} type="password" name="password" />
-        </div>
-        <button type="submit">Log In</button>
-      </form>
-    </div>
+    <section>
+      <h2>Iniciar Sesión</h2>
+      <div className="silla-bg"></div>
+      <div className="login-form-card">
+        <form action="" onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="email">Email:</label>
+            <input onChange={handleChange} type="email" name="email" />
+          </div>
+          <div>
+            <label htmlFor="password">Password:</label>
+            <input onChange={handleChange} type="password" name="password" />
+          </div>
+          <button className="button button-blue" type="submit">Iniciar Sesión</button>
+        </form>
+      </div>
+    </section>
   );
 }

@@ -12,7 +12,7 @@ const AdminRoute = ({ path, ...props }) => {
       {!loading && user !== null && user.admin === 1 ? (
         <Outlet />
       ) : (
-        <Navigate to="/login" />
+        <Navigate to={user !== null ? "/menu" : "/login"} />
       )}
     </>
   );

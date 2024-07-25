@@ -7,32 +7,42 @@ export default function CitaCard({ cita, formatFecha }) {
 
   return (
     <div className="cita-card">
-      <div>
-        {/* <p>Cita Id: {cita.id}</p> */}
-        <p>id: {cita.citaId}</p>
-        <p>FECHA: {formatFecha}</p>
-        <p>HORA: {horaFormateada}</p>
-      </div>
-      <div className="cita-servicios">
-        <h4>Estos son tus servicios:</h4>
-        <div>
-          {cita.servicios.map((servicio) => {
-            return (
-              <div key={servicio.servicioId}>
-                <p>{servicio.servicioNombre}</p>
-                <p>${servicio.servicioPrecio}</p>
-              </div>
-            );
-          })}
+      <div className="cita-container">
+        <div className="cita-datos">
+          <h4>Datos tu Cita:</h4>
+          {/* <p>Cita Id: {cita.id}</p> */}
+          <p>
+            Cita Id: <span className="cita-dato">{cita.citaId}</span>
+          </p>
+          <p>
+            FECHA: <span>{formatFecha}</span>
+          </p>
+          <p>
+            HORA: <span>{horaFormateada}</span>
+          </p>
         </div>
+        <div className="cita-servicios">
+          <h4>Estos son tus servicios:</h4>
+          <div className="ticket">
+            {cita.servicios.map((servicio) => {
+              return (
+                <div key={servicio.servicioId}>
+                  <p className="servicio-nombre">{servicio.servicioNombre}</p>
+                  <p className="precio">${servicio.servicioPrecio}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <button
+          className="button button-red"
+          onClick={() => {
+            cancelarCita(cita.citaId);
+          }}
+        >
+          cancelar cita
+        </button>
       </div>
-      <button
-        onClick={() => {
-          cancelarCita(cita.citaId);
-        }}
-      >
-        cancelar cita
-      </button>
     </div>
   );
 }

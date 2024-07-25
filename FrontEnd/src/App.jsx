@@ -13,7 +13,7 @@ import AdminRoute from "./components/AdminRoute";
 import ConfirmarEmail from "./components/ConfirmarEmail";
 function App() {
   return (
-    <>
+    <div className="app-container">
       <Navbar />
       <Routes>
         {/* PRIVATE//////////////////// */}
@@ -30,11 +30,11 @@ function App() {
         {/* ADMIN PANEL//////////////////// */}
         <Route path="/acerca-de" element={<AcercaDe />} />
         <Route path="/crear-cuenta" element={<CreateAccount />} />
-        <Route path="/login" element={<Home />} />
-        <Route path="/confirmar-email" element={<ConfirmarEmail/>} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/confirmar-email" element={<ConfirmarEmail />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-    </>
+    </div>
   );
 }
 
@@ -42,7 +42,6 @@ const Home = () => {
   return (
     <div>
       <Header />
-      <Login />
     </div>
   );
 };

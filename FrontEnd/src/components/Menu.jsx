@@ -14,14 +14,17 @@ export default function Menu() {
   }, [loading, user.id]);
 
   return (
-    <div>
+    <section>
       <h2>Menú</h2>
-      {!loading ? <i>Bienvenido: {user.nombre}</i> : <i>Cargando usuario...</i>}
-
-      <h2>
+      <div className="lamp-bg"></div>
+      <div className="user-badge">
+        <h4>Bienvenido:</h4>
+        {!loading ? <p className="user-nombre">{user.nombre}</p> : <p>Cargando usuario...</p>}
+      </div>
+      <h3>
         {" "}
         {citas.length > 0 ? "Estas son tus citas" : "No tienes citas..."}
-      </h2>
+      </h3>
       <div className="citas-container">
         {citas.map((cita, i) => {
           const fecha = new Date(cita.fecha).toLocaleDateString("es-ES", {
@@ -36,6 +39,6 @@ export default function Menu() {
           return <CitaCard key={i} cita={cita} formatFecha={formatFecha} />;
         })}
       </div>
-    </div>
+    </section>
   );
 }

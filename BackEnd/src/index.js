@@ -107,7 +107,7 @@ app.post("/crear-cuenta", async (req, res) => {
 
     if (existingUser.length > 0) {
       // return console.log(existingUser)
-      return res.status(400).json({ message: "Este mail ya esta registrado" });
+      return res.status(400).json({ message: "Este mail ya esta registrado, inicia sesión" });
     }
 
     const token = generateToken();
