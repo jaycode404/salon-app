@@ -335,7 +335,11 @@ export default function Agendar() {
         <div className="carrito-container">
           <h3>Carrito</h3>
           <h4>total: ${total}</h4>
-          {carrito.length === 0 ? <i>selecciona algun servicio...</i> : <p>aquí los servicios incluidos en tu cita:</p>}
+          {carrito.length === 0 ? (
+            <i>selecciona algun servicio...</i>
+          ) : (
+            <p>aquí los servicios incluidos en tu cita:</p>
+          )}
           <div className="carrito-box">
             {carritoBox.map((servicio, index) => {
               return (
@@ -352,7 +356,7 @@ export default function Agendar() {
         {/* esto se envia a la tabla de citas */}
         <div>
           <h3>Fecha</h3>
-          <h4>elije un dia disponible para</h4>
+          <h4>elije un dia disponible para tu cita:</h4>
           <form className="horario-form" action="" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="fecha">Fecha:</label>
@@ -372,7 +376,9 @@ export default function Agendar() {
                 onChange={handleChange}
               />
             </div>
-            <button className="button button-green" type="submit">Agendar</button>
+            <button className="button button-green" type="submit">
+              Agendar
+            </button>
           </form>
         </div>
       </div>

@@ -11,30 +11,35 @@ import PrivateRoutes from "./components/PrivateRoutes";
 import AdminPanel from "./components/AdminPanel";
 import AdminRoute from "./components/AdminRoute";
 import ConfirmarEmail from "./components/ConfirmarEmail";
+import Footer from "./components/Footer";
 function App() {
   return (
-    <div className="app-container">
-      <Navbar />
-      <Routes>
-        {/* PRIVATE//////////////////// */}
-        <Route element={<PrivateRoutes />}>
+    <>
+      <div className="app-container">
+        <Navbar />
+        <Routes>
+          {/* PRIVATE//////////////////// */}
+          <Route element={<PrivateRoutes />}>
+            
+            <Route path="/menu" element={<Menu />} />
+            <Route path="/agendar-cita" element={<Agendar />} />
+          </Route>
+          {/* PRIVATE//////////////////// */}
+          {/* ADMIN PANEL//////////////////// */}
+          <Route element={<AdminRoute />}>
+            <Route path="/admin" element={<AdminPanel />} />
+          </Route>
+          {/* ADMIN PANEL//////////////////// */}
           <Route path="/" element={<Home />} exact />
-          <Route path="/menu" element={<Menu />} />
-          <Route path="/agendar-cita" element={<Agendar />} />
-        </Route>
-        {/* PRIVATE//////////////////// */}
-        {/* ADMIN PANEL//////////////////// */}
-        <Route element={<AdminRoute />}>
-          <Route path="/admin" element={<AdminPanel />} />
-        </Route>
-        {/* ADMIN PANEL//////////////////// */}
-        <Route path="/acerca-de" element={<AcercaDe />} />
-        <Route path="/crear-cuenta" element={<CreateAccount />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/confirmar-email" element={<ConfirmarEmail />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </div>
+          <Route path="/acerca-de" element={<AcercaDe />} />
+          <Route path="/crear-cuenta" element={<CreateAccount />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/confirmar-email" element={<ConfirmarEmail />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </div>
+      <Footer />
+    </>
   );
 }
 

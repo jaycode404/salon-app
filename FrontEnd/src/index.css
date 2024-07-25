@@ -29,6 +29,16 @@ body {
   color: #000;
   font-family: var(--text-font);
 }
+header {
+  min-height: 60vh;
+  height: auto;
+  margin-bottom: 4rem;
+}
+section {
+  min-height: 100vh;
+  height: auto;
+  margin-bottom: 4rem;
+}
 
 /* xxs */
 @media (min-width: 320px) {
@@ -165,10 +175,14 @@ body {
   .nav-container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+
     padding: 1rem 0;
   }
   .navlist-container {
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 1rem;
   }
   .logo-tijeras {
@@ -187,8 +201,6 @@ body {
     grid-template-columns: repeat(2, 1fr);
     justify-content: center;
     align-items: center;
-    margin-top: 4rem;
-    height: 30vh;
   }
   .header-title {
     text-align: left;
@@ -204,7 +216,7 @@ body {
     background-image: url(../public/assets/water.png);
     width: 25rem;
     height: 25rem;
-    top: -40%;
+    top: -20%;
     left: -40%;
     background-position: center;
     background-size: cover;
@@ -253,6 +265,10 @@ body {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
     margin: 0 auto;
   }
+  .agendar-form-card button {
+    font-size: inherit;
+    font-weight: inherit;
+  }
   .horario-form {
     display: flex;
     place-items: start;
@@ -277,6 +293,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+    padding: 0.5rem;
     min-height: 4rem;
   }
   /* MENU --------------------------*/
@@ -441,6 +458,61 @@ body {
     100% {
       transform: rotate(360deg);
     }
+  }
+  /* ACERCA DE ------------------------- */
+  .acercade-images-container {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+    place-content: center;
+  }
+  .acercade-images-container div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .acercade-images-container img {
+    height: 100%;
+    width: 100%;
+    max-width: 16rem;
+  }
+  /* FOOTER ------------------------- */
+  .footer-container {
+    background-color: black;
+    color: white;
+    height: 30vh;
+  }
+  .footer-container {
+    background-color: black;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .footer-column {
+    flex: 1;
+    min-width: 200px;
+    margin: 1rem;
+  }
+
+  .footer-column h4 {
+    margin-bottom: 1rem;
+  }
+
+  .footer-column p,
+  .footer-column a {
+    margin: 0.5rem 0;
+    color: gray;
+  }
+
+  .footer-column a {
+    text-decoration: none;
+  }
+
+  .footer-column a:hover {
+    text-decoration: underline;
   }
 }
 /* L */

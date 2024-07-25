@@ -55,7 +55,7 @@ export function Navbar() {
     <nav className="nav-container">
       <div className="logo-container">
         <img className="logo-tijeras" src="/assets/tijeras.png" alt="" />
-        <Link to={`${user !== null ? "/menu" : "/login"}`}>SALON</Link>
+        <Link to={`/`}>SALON</Link>
       </div>
       <NavList />
     </nav>

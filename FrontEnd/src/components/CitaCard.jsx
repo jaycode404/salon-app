@@ -15,10 +15,10 @@ export default function CitaCard({ cita, formatFecha }) {
             Cita Id: <span className="cita-dato">{cita.citaId}</span>
           </p>
           <p>
-            FECHA: <span>{formatFecha}</span>
+            Fecha: <span>{formatFecha}</span>
           </p>
           <p>
-            HORA: <span>{horaFormateada}</span>
+            Hora: <span>{horaFormateada}</span>
           </p>
         </div>
         <div>
