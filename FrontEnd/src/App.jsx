@@ -12,6 +12,7 @@ import AdminPanel from "./components/AdminPanel";
 import AdminRoute from "./components/AdminRoute";
 import ConfirmarEmail from "./components/ConfirmarEmail";
 import Footer from "./components/Footer";
+import Nosotros from "./components/Nosotros";
 function App() {
   return (
     <>
@@ -47,6 +48,7 @@ const Home = () => {
   return (
     <div>
       <Header />
+      <Nosotros/>
     </div>
   );
 };
