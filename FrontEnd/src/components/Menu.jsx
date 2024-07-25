@@ -23,7 +23,7 @@ export default function Menu() {
       </div>
       <h3>
         {" "}
-        {citas.length > 0 ? "Estas son tus citas" : "No tienes citas..."}
+        {citas.length > 0 ? "Estas son tus citas:" : "No tienes citas..."}
       </h3>
       <div className="citas-container">
         {citas.map((cita, i) => {

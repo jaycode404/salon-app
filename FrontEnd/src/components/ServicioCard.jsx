@@ -14,12 +14,11 @@ export default function ServicioCard({ servicio, addCarrito, quitar }) {
   return (
     <div
       ref={cardRef}
-      className="servicio-card"
+      className="servicio-card ticket"
       onClick={() => {
         addCarrito(servicio.id);
       }}
     >
-      <p>{servicio.id}</p>
       <p>{servicio.nombre}</p>
       <p>${servicio.precio}</p>
 

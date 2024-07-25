@@ -50,46 +50,49 @@ export default function Agendar() {
   const validarHorario = async (fecha, hora) => {
     const formatedFecha = formatFecha(fecha);
     const citas = await getCitas(formatedFecha);
-  
+
     const [formHoraHoras, formHoraMinutos] = hora.split(":").map(Number);
     const formHoraEnMinutos = formHoraHoras * 60 + formHoraMinutos;
-  
-    const margin = 20; // Margen de tiempo en minutos
-    let proximaHoraDisponible = null; // Variable para almacenar la próxima hora disponible
-  
+
+    const margin = 20;
+    let proximaHoraDisponible = null;
+
     const citasEmpalmadas = citas.filter((cita) => {
       const existingCitaDate = new Date(cita.fecha);
       const existingCitaFecha = existingCitaDate.toISOString().split("T")[0];
       const existingCitaHora = cita.hora;
-  
+
       if (existingCitaFecha !== formatedFecha && !fechaValida(formatedFecha)) {
         return false;
       }
-  
+
       const [existingHoraHoras, existingHoraMinutos] = existingCitaHora
         .split(":")
         .map(Number);
       const existingHoraEnMinutos =
         existingHoraHoras * 60 + existingHoraMinutos;
-  
-      const isEmpalmada = Math.abs(existingHoraEnMinutos - formHoraEnMinutos) < margin;
-  
+
+      const isEmpalmada =
+        Math.abs(existingHoraEnMinutos - formHoraEnMinutos) < margin;
+
       if (isEmpalmada) {
         const proximaHora = existingHoraEnMinutos + margin;
-        const horas = Math.floor(proximaHora / 60).toString().padStart(2, '0');
-        const minutos = (proximaHora % 60).toString().padStart(2, '0');
+        const horas = Math.floor(proximaHora / 60)
+          .toString()
+          .padStart(2, "0");
+        const minutos = (proximaHora % 60).toString().padStart(2, "0");
         proximaHoraDisponible = `${horas}:${minutos}`;
       }
-  
+
       return isEmpalmada;
     });
-  
+
     return {
       horarioOcupado: citasEmpalmadas.length > 0,
       proximaHoraDisponible,
     };
   };
-  
+
   //validar fecha//////////////////////////////
   const fechaValida = (fecha) => {
     const fechaSeleccionada = parse(fecha, "yyyy-MM-dd", new Date());
@@ -122,13 +125,13 @@ export default function Agendar() {
   //handleChange//////////////////////////////
   const handleChange = async (e) => {
     const { name, value } = e.target;
-  
+
     setForm({
       ...form,
       [name]: value,
       usuarioId: user.id,
     });
-  
+
     if (name === "fecha") {
       const fechaValidada = fechaValida(value);
       if (fechaValidada === false) {
@@ -140,10 +143,13 @@ export default function Agendar() {
         return;
       }
     }
-  
+
     if (name === "hora") {
       if (form.fecha) {
-        const { horarioOcupado, proximaHoraDisponible } = await validarHorario(form.fecha, value);
+        const { horarioOcupado, proximaHoraDisponible } = await validarHorario(
+          form.fecha,
+          value
+        );
         const horaValidada = horaValida(form.fecha, value);
         if (horarioOcupado) {
           Swal.fire({
@@ -306,68 +312,70 @@ export default function Agendar() {
   }, [carritoBox]);
 
   return (
-    <div>
+    <section>
       <h2>Agendar Cita</h2>
-      <div>
-        <h3>Servicios</h3>
-        <p>Elije tus servicios</p>
-        <div className="servicios-container">
-          {servicios.map((servicio, i) => {
-            return (
-              <ServicioCard
-                key={i}
-                quitar={quitar}
-                servicio={servicio}
-                addCarrito={addCarrito}
-              />
-            );
-          })}
+      <div className="agendar-form-card">
+        <div>
+          <h3>Servicios</h3>
+          <h4>Elije tus servicios:</h4>
+          <div className="servicios-container">
+            {servicios.map((servicio, i) => {
+              return (
+                <ServicioCard
+                  key={i}
+                  quitar={quitar}
+                  servicio={servicio}
+                  addCarrito={addCarrito}
+                />
+              );
+            })}
+          </div>
         </div>
-      </div>
-      {/* esto se envia a la tabla de citasservicios */}
-      <div>
-        <h3>Carrito</h3>
-        <h4>total: ${total}</h4>
-        <p>aqui tus servicios incluidos en tu cita</p>
+        {/* esto se envia a la tabla de citasservicios */}
         <div className="carrito-container">
-          {carritoBox.map((servicio, index) => {
-            return (
-              <ServicioCard
-                key={index}
-                servicio={servicio}
-                addCarrito={addCarrito}
-                quitar={quitar}
+          <h3>Carrito</h3>
+          <h4>total: ${total}</h4>
+          {carrito.length === 0 ? <i>selecciona algun servicio...</i> : <p>aquí los servicios incluidos en tu cita:</p>}
+          <div className="carrito-box">
+            {carritoBox.map((servicio, index) => {
+              return (
+                <ServicioCard
+                  key={index}
+                  servicio={servicio}
+                  addCarrito={addCarrito}
+                  quitar={quitar}
+                />
+              );
+            })}
+          </div>
+        </div>
+        {/* esto se envia a la tabla de citas */}
+        <div>
+          <h3>Fecha</h3>
+          <h4>elije un dia disponible para</h4>
+          <form className="horario-form" action="" onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="fecha">Fecha:</label>
+              <input
+                type="date"
+                name="fecha"
+                value={form.fecha}
+                onChange={handleChange}
               />
-            );
-          })}
+            </div>
+            <div>
+              <label htmlFor="hora">Hora:</label>
+              <input
+                value={form.hora}
+                type="time"
+                name="hora"
+                onChange={handleChange}
+              />
+            </div>
+            <button className="button button-green" type="submit">Agendar</button>
+          </form>
         </div>
       </div>
-      {/* esto se envia a la tabla de citas */}
-      <div>
-        <h3>Fecha</h3>
-        <p>elije un dia disponible para</p>
-        <form action="" onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="fecha">Fecha:</label>
-            <input
-              type="date"
-              name="fecha"
-              value={form.fecha}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="hora">Hora:</label>
-            <input
-              value={form.hora}
-              type="time"
-              name="hora"
-              onChange={handleChange}
-            />
-          </div>
-          <button type="submit">Agendar</button>
-        </form>
-      </div>
-    </div>
+    </section>
   );
 }

@@ -40,7 +40,11 @@ export const NavList = () => {
           {link}
         </Link>
       ))}
-      {user && <button onClick={handleCerrarSesion}>Cerrar Sesión</button>}
+      {user && (
+        <button className="button button-black" onClick={handleCerrarSesion}>
+          Cerrar Sesión
+        </button>
+      )}
     </div>
   );
 };

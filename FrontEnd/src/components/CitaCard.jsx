@@ -21,12 +21,12 @@ export default function CitaCard({ cita, formatFecha }) {
             HORA: <span>{horaFormateada}</span>
           </p>
         </div>
-        <div className="cita-servicios">
+        <div>
           <h4>Estos son tus servicios:</h4>
-          <div className="ticket">
+          <div className="cita-servicios">
             {cita.servicios.map((servicio) => {
               return (
-                <div key={servicio.servicioId}>
+                <div className="ticket" key={servicio.servicioId}>
                   <p className="servicio-nombre">{servicio.servicioNombre}</p>
                   <p className="precio">${servicio.servicioPrecio}</p>
                 </div>
@@ -34,7 +34,9 @@ export default function CitaCard({ cita, formatFecha }) {
             })}
           </div>
         </div>
-        <button
+       
+      </div>
+      <button
           className="button button-red"
           onClick={() => {
             cancelarCita(cita.citaId);
@@ -42,7 +44,6 @@ export default function CitaCard({ cita, formatFecha }) {
         >
           cancelar cita
         </button>
-      </div>
     </div>
   );
 }

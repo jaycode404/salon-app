@@ -85,7 +85,7 @@ body {
     outline: none;
     width: 80%;
     margin-left: 1rem;
-    border-radius: var(--border-radius);
+    /* border-radius: var(--border-radius); */
   }
 
   input:focus {
@@ -95,7 +95,6 @@ body {
 
   section h3 {
     font-size: 16px;
-    margin-bottom: 2rem;
   }
   section h2 {
     text-align: center;
@@ -243,6 +242,43 @@ body {
     z-index: -3;
     /* filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3)); */
   }
+  /* AGENDAR --------------------------*/
+  .agendar-form-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    width: fit-content;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+  }
+  .horario-form {
+    display: flex;
+    place-items: start;
+  }
+  .horario-form input {
+    width: auto;
+  }
+
+  .agendar-form-card h3 {
+    font-weight: 600;
+    font-size: 20px;
+  }
+  .agendar-form-card h4 {
+    font-weight: 600;
+    font-size: 10px;
+    margin-bottom: 1rem;
+  }
+  .carrito-container i {
+    color: gray;
+  }
+  .carrito-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    min-height: 4rem;
+  }
   /* MENU --------------------------*/
   .lamp-bg {
     content: "";
@@ -254,30 +290,23 @@ body {
     right: 10%;
     background-position: center;
     background-size: cover;
-    z-index: -3;
+    z-index: -9;
     /* filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3)); */
   }
   .user-badge h4 {
     font-size: 20px;
+    font-weight: 600;
   }
   .user-badge {
     display: flex;
     gap: 1rem;
     align-items: center;
-    margin-bottom: 2rem;
   }
   .user-nombre {
     text-transform: uppercase;
-    font-weight: 600;
-    font-size: 20px;
-    background: linear-gradient(
-      to right,
-      #06b6d4,
-      #3b82f6,
-      #a855f7,
-      #ec4899,
-      #f43f5e
-    );
+    font-weight: 900;
+    font-size: 22px;
+    background: linear-gradient(to right, #06b6d4, #3b82f6);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -299,14 +328,25 @@ body {
     font-size: 13px;
     margin-bottom: 0.5rem;
   }
+  .cita-servicios {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
 
+  .ticket:hover {
+    cursor: pointer;
+    scale: 105%;
+  }
   .ticket {
     position: relative;
     background-color: #000; /* Color del boleto */
-    color: white; /* Color del texto */
-    padding: 1rem 2rem;
+    color: var(--main-color); /* Color del texto */
+    padding: 0.5rem 1rem;
     overflow: hidden;
     width: fit-content;
+    height: fit-content;
+    max-width: 100%;
   }
 
   .ticket::after {
@@ -316,7 +356,7 @@ body {
     width: 0.1rem;
     top: 0;
     background-color: white;
-    right: 1rem;
+    right: 0.4rem;
   }
   .ticket::before {
     content: "";
@@ -347,23 +387,32 @@ body {
   }
   .servicio-card {
     border: 1px solid white;
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
     border-radius: 5px;
   }
 
   /* CITA --------------------------*/
   .cita-card {
+    display: flex;
+    background-color: var(--main-color);
+    flex-direction: column;
+    gap: 1rem;
     padding: 1rem;
     border-radius: var(--border-radius);
     width: fit-content;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
   }
+  .cita-card button {
+    align-self: flex-column-end;
+    margin-top: auto;
+  }
 
   .citas-container {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 1rem;
-    width: 50%;
+    width: 100%;
+    margin-top: 2rem;
   }
 
   .swal2-loading {
