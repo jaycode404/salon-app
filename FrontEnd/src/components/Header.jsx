@@ -11,7 +11,7 @@ export default function Header() {
       </div>
       <div className="header-image-container">
         <div className="water-bg"></div>
-        <img className="header-image" src="/assets/shampoo.png" alt="shampoo" />
+        <img className="header-image" src="/assets/shampoo2.png" alt="shampoo" />
       </div>
     </header>
   );

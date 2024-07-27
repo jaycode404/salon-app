@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function Testimoniales() {
+  const [loading, setLoading] = useState(true)
   return (
     <div className="testimoniales-container">
       <h3>Nuestros clientes opinan:</h3>

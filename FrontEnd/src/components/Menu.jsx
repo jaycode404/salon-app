@@ -24,8 +24,7 @@ export default function Menu() {
         ) : (
           <p>Cargando usuario...</p>
         )}
-      </div>
-      <h3>
+            <h3>
         {" "}
         {citas.length > 0 ? (
           "Estas son tus citas:"
@@ -38,6 +37,8 @@ export default function Menu() {
           </div>
         )}
       </h3>
+      </div>
+  
 
       <div className="citas-container">
         {citas.map((cita, i) => {

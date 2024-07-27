@@ -43,7 +43,7 @@ export default function CitaCard({ cita, formatFecha }) {
           </div>
         </div>
       </div>
-      <div className="cita-button-container">
+      {/* <div className="cita-button-container">
         {/* <button
           className="button button-blue"
           onClick={() => {
@@ -51,7 +51,7 @@ export default function CitaCard({ cita, formatFecha }) {
           }}
         >
           editar cita
-        </button> */}
+        </button> */} 
         <button
           className="button button-red"
           onClick={() => {
@@ -61,6 +61,6 @@ export default function CitaCard({ cita, formatFecha }) {
           cancelar cita
         </button>
       </div>
-    </div>
+    // </div>
   );
 }

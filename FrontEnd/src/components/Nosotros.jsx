@@ -11,9 +11,7 @@ export default function Nosotros() {
         obcaecati molestiae, soluta, similique tenetur dolorem quaerat eaque
         maxime dolore! Maiores.
       </p>
-      <div>
-        <Testimoniales />
-      </div>
+      <Testimoniales />
 
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, sed
