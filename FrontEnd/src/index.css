@@ -2686,11 +2686,1053 @@ section {
   .container {
     max-width: 1200px;
   }
+  :root {
+    --app-width: 60%;
+  }
+  .app-container {
+    width: var(--app-width);
+    margin: var(--app-margin);
+  }
+  /* ELEMENTS--------------------------*/
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: var(--title-font);
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  input {
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 8px;
+    outline: none;
+    width: 80%;
+    margin-left: 1rem;
+    /* border-radius: var(--border-radius); */
+  }
+
+  input:focus {
+    border-bottom-color: black;
+    transition: 0.3s;
+  }
+
+  section h3 {
+    font-size: 16px;
+  }
+  section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  button:hover {
+    cursor: pointer;
+    scale: 102%;
+    transition: 0.1s ease-in-out;
+  }
+  /* GENERAL ----------------------------- */
+  .button {
+    padding: 0.4rem;
+    width: fit-content;
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    text-transform: uppercase;
+    font-size: 10px;
+  }
+  .button-black {
+    background-color: #000;
+  }
+  .button-green {
+    background-color: #0fa968;
+  }
+  .button-blue {
+    background-color: #1e7dd9;
+  }
+  .button-red {
+    background-color: #e22d20;
+  }
+  /* FORM --------------------------*/
+  .create-form-card form {
+    width: 20rem;
+  }
+  .create-form-card {
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    width: fit-content;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+  }
+  .login-form-card {
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    width: fit-content;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  form div {
+    display: flex;
+    gap: 0.2rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .form-password-container {
+    /* display: flex;
+    gap: 1rem; */
+  }
+  /* NAVBAR --------------------------*/
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1rem 0;
+  }
+  .navlist-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+  .logo-tijeras {
+    /* aspect-ratio: 3 / 2; */
+    width: 1rem;
+  }
+  .logo-container {
+    display: flex;
+    gap: 0.2rem;
+    justify-content: center;
+    align-items: center;
+  }
+  /* HEADER --------------------------*/
+  .header-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+  }
+  .header-container p,
+  .header-container button {
+    margin-bottom: 0.5rem;
+    margin-left: 0.5rem;
+  }
+
+  .header-title {
+    text-align: left;
+    font-size: 45px;
+  }
+  .header-image-container {
+    position: relative;
+    margin-left: 1rem;
+  }
+  .header-image-container::after {
+    content: "";
+    position: absolute;
+    background-image: url(/assets/water.png);
+    width: 30rem;
+    height: 30rem;
+    top: -35%;
+    left: -30%;
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+  }
+
+  .header-image {
+    width: 18rem;
+    transform: rotate(-20deg);
+  }
+  /* CREATE ACC --------------------------*/
+  .items-bg {
+    content: "";
+    position: absolute;
+    background-image: url(/assets/items-2.png);
+    width: 15rem;
+    height: 15rem;
+    top: 20%;
+    left: 10%;
+    background-position: center;
+    background-size: cover;
+    z-index: -3;
+  }
+  /* LOGIN --------------------------*/
+  .silla-bg {
+    content: "";
+    position: absolute;
+    background-image: url(/assets/silla.png);
+    width: 25rem;
+    height: 25rem;
+    top: 20%;
+    left: 10%;
+    background-position: center;
+    background-size: cover;
+    z-index: -3;
+    /* filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3)); */
+  }
+  /* AGENDAR --------------------------*/
+  .agendar-form-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    width: fit-content;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+  }
+  .agendar-form-card button {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  .horario-form {
+    display: flex;
+    place-items: start;
+  }
+  .horario-form input {
+    width: auto;
+  }
+
+  .agendar-form-card h3 {
+    font-weight: 600;
+    font-size: 20px;
+  }
+  .agendar-form-card h4 {
+    font-weight: 600;
+    font-size: 10px;
+    margin-bottom: 1rem;
+  }
+  .carrito-container i {
+    color: gray;
+  }
+  .carrito-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    min-height: 4rem;
+  }
+  /* MENU --------------------------*/
+  .lamp-bg {
+    content: "";
+    position: absolute;
+    background-image: url(/assets/lamp.png);
+    width: 25rem;
+    height: 27rem;
+    top: 10%;
+    right: 10%;
+    background-position: center;
+    background-size: cover;
+    z-index: -9;
+    /* filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3)); */
+  }
+  .user-badge h4 {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .user-badge {
+    display: flex;
+    align-items: start;
+  }
+  .user-nombre {
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 22px;
+    background: linear-gradient(to right, #06b6d4, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  /* CITA --------------------------*/
+  .cita-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+  .cita-container span {
+    font-weight: 400;
+    color: #2a2d2d;
+  }
+  .cita-container p {
+    font-weight: 400;
+  }
+  .cita-container h4 {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 0.5rem;
+  }
+  .cita-servicios {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .ticket:hover {
+    cursor: pointer;
+    scale: 105%;
+  }
+  .ticket {
+    position: relative;
+    background-color: #000; /* Color del boleto */
+    color: var(--main-color); /* Color del texto */
+    padding: 0.5rem 1rem;
+    overflow: hidden;
+    width: fit-content;
+    height: fit-content;
+    max-width: 100%;
+  }
+
+  .ticket::after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 0.1rem;
+    top: 0;
+    background-color: white;
+    right: 0.4rem;
+  }
+  .ticket::before {
+    content: "";
+    position: absolute;
+    background-color: #000;
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 2px solid white;
+    background-color: white;
+  }
+
+  .ticket::before {
+    margin: 0.5rem 0;
+    left: -0.75rem;
+  }
+  .precio {
+    color: #33b44d;
+  }
+  .servicio-nombre {
+    /* color: #06b6d4; */
+  }
+  /* SERVICIOS --------------------------*/
+  .servicios-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .servicio-card {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+  }
+  .servicio-card button {
+    font-size: 10px;
+  }
+
+  /* CITA --------------------------*/
+  .cita-card {
+    display: flex;
+    background-color: var(--main-color);
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    width: fit-content;
+    max-width: 90%;
+    margin: 0;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+  }
+  .cita-card button {
+    align-self: flex-column-end;
+    margin-top: auto;
+  }
+
+  .citas-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 2rem;
+  }
+  .cita-button-container {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .swal2-loading {
+    display: block;
+    margin: 0 auto;
+    width: 80px;
+    height: 80px;
+  }
+
+  .swal2-loading:after {
+    content: " ";
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid #000;
+    border-color: #000 transparent #000 transparent;
+    animation: swal2-loading-spin 1.2s linear infinite;
+  }
+
+  @keyframes swal2-loading-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  /* ACERCA DE ------------------------- */
+  .acercade-images-container {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+    place-content: center;
+  }
+  .acercade-images-container div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .acercade-images-container img {
+    height: 100%;
+    width: 100%;
+    max-width: 16rem;
+  }
+  /* NOSOTROS ------------------------- */
+  .nosotros-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  /* testimoniales ------------------------- */
+  .testimoniales-container h3 {
+    text-align: center;
+    margin: 1rem;
+  }
+  .testimoniales-container {
+    min-height: 18rem;
+  }
+  /*CONFIRM EMAIL -----------------------*/
+  .confirm-message {
+    font-size: 30px;
+    font-weight: 700;
+  }
+  .red-gradient {
+    background: linear-gradient(to right, #ff0000, #ff4d4d, #ff9999);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  /* ADMIN ------------------------- */
+  .admin-citas-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .admin-citas-container h3 {
+    margin-bottom: 1rem;
+  }
+  .fecha-group h3 {
+    font-weight: 700;
+    font-size: 18px;
+  }
+  .fecha-group-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .admin-cita-card {
+    display: flex;
+    background-color: var(--main-color);
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    width: fit-content;
+    max-width: 24%;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.5);
+  }
+  .admin-cita-card span {
+    font-weight: 400;
+  }
+  .admin-cita-card p {
+    font-weight: 800;
+    font-size: 12px;
+  }
+  /* FOOTER ------------------------- */
+
+  .footer-container {
+    background-color: black;
+    color: white;
+    height: 30vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size: 16px;
+  }
+
+  .footer-column {
+    flex: 1;
+    min-width: 200px;
+    margin: 1rem;
+  }
+
+  .footer-column h4 {
+    margin-bottom: 1rem;
+  }
+
+  .footer-column p,
+  .footer-column a {
+    margin: 0.5rem 0;
+    color: gray;
+  }
+
+  .footer-column a {
+    text-decoration: none;
+  }
+
+  .footer-column a:hover {
+    text-decoration: underline;
+  }
 }
 /* xl */
 @media (min-width: 1430px) {
   .container {
     max-width: 1430px;
+  }
+  :root {
+    --app-width: 60%;
+  }
+  .app-container {
+    width: var(--app-width);
+    margin: var(--app-margin);
+  }
+  /* ELEMENTS--------------------------*/
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: var(--title-font);
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  input {
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 8px;
+    outline: none;
+    width: 80%;
+    margin-left: 1rem;
+    /* border-radius: var(--border-radius); */
+  }
+
+  input:focus {
+    border-bottom-color: black;
+    transition: 0.3s;
+  }
+
+  section h3 {
+    font-size: 16px;
+  }
+  section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  button:hover {
+    cursor: pointer;
+    scale: 102%;
+    transition: 0.1s ease-in-out;
+  }
+  /* GENERAL ----------------------------- */
+  .button {
+    padding: 0.4rem;
+    width: fit-content;
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    text-transform: uppercase;
+    font-size: 10px;
+  }
+  .button-black {
+    background-color: #000;
+  }
+  .button-green {
+    background-color: #0fa968;
+  }
+  .button-blue {
+    background-color: #1e7dd9;
+  }
+  .button-red {
+    background-color: #e22d20;
+  }
+  /* FORM --------------------------*/
+  .create-form-card form {
+    width: 20rem;
+  }
+  .create-form-card {
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    width: fit-content;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+  }
+  .login-form-card {
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    width: fit-content;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  form div {
+    display: flex;
+    gap: 0.2rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .form-password-container {
+    /* display: flex;
+    gap: 1rem; */
+  }
+  /* NAVBAR --------------------------*/
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1rem 0;
+  }
+  .navlist-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+  .logo-tijeras {
+    /* aspect-ratio: 3 / 2; */
+    width: 1rem;
+  }
+  .logo-container {
+    display: flex;
+    gap: 0.2rem;
+    justify-content: center;
+    align-items: center;
+  }
+  /* HEADER --------------------------*/
+  .header-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+  }
+  .header-container p,
+  .header-container button {
+    margin-bottom: 0.5rem;
+    margin-left: 0.5rem;
+  }
+
+  .header-title {
+    text-align: left;
+    font-size: 45px;
+  }
+  .header-image-container {
+    position: relative;
+    margin-left: 1rem;
+  }
+  .header-image-container::after {
+    content: "";
+    position: absolute;
+    background-image: url(/assets/water.png);
+    width: 30rem;
+    height: 30rem;
+    top: -35%;
+    left: -30%;
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+  }
+
+  .header-image {
+    width: 18rem;
+    transform: rotate(-20deg);
+  }
+  /* CREATE ACC --------------------------*/
+  .items-bg {
+    content: "";
+    position: absolute;
+    background-image: url(/assets/items-2.png);
+    width: 15rem;
+    height: 15rem;
+    top: 20%;
+    left: 10%;
+    background-position: center;
+    background-size: cover;
+    z-index: -3;
+  }
+  /* LOGIN --------------------------*/
+  .silla-bg {
+    content: "";
+    position: absolute;
+    background-image: url(/assets/silla.png);
+    width: 25rem;
+    height: 25rem;
+    top: 20%;
+    left: 10%;
+    background-position: center;
+    background-size: cover;
+    z-index: -3;
+    /* filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3)); */
+  }
+  /* AGENDAR --------------------------*/
+  .agendar-form-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    width: fit-content;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+  }
+  .agendar-form-card button {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  .horario-form {
+    display: flex;
+    place-items: start;
+  }
+  .horario-form input {
+    width: auto;
+  }
+
+  .agendar-form-card h3 {
+    font-weight: 600;
+    font-size: 20px;
+  }
+  .agendar-form-card h4 {
+    font-weight: 600;
+    font-size: 10px;
+    margin-bottom: 1rem;
+  }
+  .carrito-container i {
+    color: gray;
+  }
+  .carrito-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    min-height: 4rem;
+  }
+  /* MENU --------------------------*/
+  .lamp-bg {
+    content: "";
+    position: absolute;
+    background-image: url(/assets/lamp.png);
+    width: 25rem;
+    height: 27rem;
+    top: 10%;
+    right: 10%;
+    background-position: center;
+    background-size: cover;
+    z-index: -9;
+    /* filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3)); */
+  }
+  .user-badge h4 {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .user-badge {
+    display: flex;
+    align-items: start;
+  }
+  .user-nombre {
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 22px;
+    background: linear-gradient(to right, #06b6d4, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  /* CITA --------------------------*/
+  .cita-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+  .cita-container span {
+    font-weight: 400;
+    color: #2a2d2d;
+  }
+  .cita-container p {
+    font-weight: 400;
+  }
+  .cita-container h4 {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 0.5rem;
+  }
+  .cita-servicios {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .ticket:hover {
+    cursor: pointer;
+    scale: 105%;
+  }
+  .ticket {
+    position: relative;
+    background-color: #000; /* Color del boleto */
+    color: var(--main-color); /* Color del texto */
+    padding: 0.5rem 1rem;
+    overflow: hidden;
+    width: fit-content;
+    height: fit-content;
+    max-width: 100%;
+  }
+
+  .ticket::after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 0.1rem;
+    top: 0;
+    background-color: white;
+    right: 0.4rem;
+  }
+  .ticket::before {
+    content: "";
+    position: absolute;
+    background-color: #000;
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 2px solid white;
+    background-color: white;
+  }
+
+  .ticket::before {
+    margin: 0.5rem 0;
+    left: -0.75rem;
+  }
+  .precio {
+    color: #33b44d;
+  }
+  .servicio-nombre {
+    /* color: #06b6d4; */
+  }
+  /* SERVICIOS --------------------------*/
+  .servicios-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .servicio-card {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+  }
+  .servicio-card button {
+    font-size: 10px;
+  }
+
+  /* CITA --------------------------*/
+  .cita-card {
+    display: flex;
+    background-color: var(--main-color);
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    width: fit-content;
+    max-width: 90%;
+    margin: 0;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+  }
+  .cita-card button {
+    align-self: flex-column-end;
+    margin-top: auto;
+  }
+
+  .citas-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 2rem;
+  }
+  .cita-button-container {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .swal2-loading {
+    display: block;
+    margin: 0 auto;
+    width: 80px;
+    height: 80px;
+  }
+
+  .swal2-loading:after {
+    content: " ";
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid #000;
+    border-color: #000 transparent #000 transparent;
+    animation: swal2-loading-spin 1.2s linear infinite;
+  }
+
+  @keyframes swal2-loading-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  /* ACERCA DE ------------------------- */
+  .acercade-images-container {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+    place-content: center;
+  }
+  .acercade-images-container div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .acercade-images-container img {
+    height: 100%;
+    width: 100%;
+    max-width: 16rem;
+  }
+  /* NOSOTROS ------------------------- */
+  .nosotros-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  /* testimoniales ------------------------- */
+  .testimoniales-container h3 {
+    text-align: center;
+    margin: 1rem;
+  }
+  .testimoniales-container {
+    min-height: 18rem;
+  }
+  /*CONFIRM EMAIL -----------------------*/
+  .confirm-message {
+    font-size: 30px;
+    font-weight: 700;
+  }
+  .red-gradient {
+    background: linear-gradient(to right, #ff0000, #ff4d4d, #ff9999);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  /* ADMIN ------------------------- */
+  .admin-citas-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .admin-citas-container h3 {
+    margin-bottom: 1rem;
+  }
+  .fecha-group h3 {
+    font-weight: 700;
+    font-size: 18px;
+  }
+  .fecha-group-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .admin-cita-card {
+    display: flex;
+    background-color: var(--main-color);
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    width: fit-content;
+    max-width: 24%;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.5);
+  }
+  .admin-cita-card span {
+    font-weight: 400;
+  }
+  .admin-cita-card p {
+    font-weight: 800;
+    font-size: 12px;
+  }
+  /* FOOTER ------------------------- */
+
+  .footer-container {
+    background-color: black;
+    color: white;
+    height: 30vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size: 16px;
+  }
+
+  .footer-column {
+    flex: 1;
+    min-width: 200px;
+    margin: 1rem;
+  }
+
+  .footer-column h4 {
+    margin-bottom: 1rem;
+  }
+
+  .footer-column p,
+  .footer-column a {
+    margin: 0.5rem 0;
+    color: gray;
+  }
+
+  .footer-column a {
+    text-decoration: none;
+  }
+
+  .footer-column a:hover {
+    text-decoration: underline;
   }
 }
 /* 2xl */
@@ -2698,10 +3740,1052 @@ section {
   .container {
     max-width: 1536px;
   }
+  :root {
+    --app-width: 60%;
+  }
+  .app-container {
+    width: var(--app-width);
+    margin: var(--app-margin);
+  }
+  /* ELEMENTS--------------------------*/
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: var(--title-font);
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  input {
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 8px;
+    outline: none;
+    width: 80%;
+    margin-left: 1rem;
+    /* border-radius: var(--border-radius); */
+  }
+
+  input:focus {
+    border-bottom-color: black;
+    transition: 0.3s;
+  }
+
+  section h3 {
+    font-size: 16px;
+  }
+  section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  button:hover {
+    cursor: pointer;
+    scale: 102%;
+    transition: 0.1s ease-in-out;
+  }
+  /* GENERAL ----------------------------- */
+  .button {
+    padding: 0.4rem;
+    width: fit-content;
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    text-transform: uppercase;
+    font-size: 10px;
+  }
+  .button-black {
+    background-color: #000;
+  }
+  .button-green {
+    background-color: #0fa968;
+  }
+  .button-blue {
+    background-color: #1e7dd9;
+  }
+  .button-red {
+    background-color: #e22d20;
+  }
+  /* FORM --------------------------*/
+  .create-form-card form {
+    width: 20rem;
+  }
+  .create-form-card {
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    width: fit-content;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+  }
+  .login-form-card {
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    width: fit-content;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  form div {
+    display: flex;
+    gap: 0.2rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .form-password-container {
+    /* display: flex;
+    gap: 1rem; */
+  }
+  /* NAVBAR --------------------------*/
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1rem 0;
+  }
+  .navlist-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+  .logo-tijeras {
+    /* aspect-ratio: 3 / 2; */
+    width: 1rem;
+  }
+  .logo-container {
+    display: flex;
+    gap: 0.2rem;
+    justify-content: center;
+    align-items: center;
+  }
+  /* HEADER --------------------------*/
+  .header-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+  }
+  .header-container p,
+  .header-container button {
+    margin-bottom: 0.5rem;
+    margin-left: 0.5rem;
+  }
+
+  .header-title {
+    text-align: left;
+    font-size: 45px;
+  }
+  .header-image-container {
+    position: relative;
+    margin-left: 1rem;
+  }
+  .header-image-container::after {
+    content: "";
+    position: absolute;
+    background-image: url(/assets/water.png);
+    width: 30rem;
+    height: 30rem;
+    top: -35%;
+    left: -30%;
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+  }
+
+  .header-image {
+    width: 18rem;
+    transform: rotate(-20deg);
+  }
+  /* CREATE ACC --------------------------*/
+  .items-bg {
+    content: "";
+    position: absolute;
+    background-image: url(/assets/items-2.png);
+    width: 15rem;
+    height: 15rem;
+    top: 20%;
+    left: 20%;
+    background-position: center;
+    background-size: cover;
+    z-index: -3;
+  }
+  /* LOGIN --------------------------*/
+  .silla-bg {
+    content: "";
+    position: absolute;
+    background-image: url(/assets/silla.png);
+    width: 25rem;
+    height: 25rem;
+    top: 20%;
+    left: 18%;
+    background-position: center;
+    background-size: cover;
+    z-index: -3;
+    /* filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3)); */
+  }
+  /* AGENDAR --------------------------*/
+  .agendar-form-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    width: fit-content;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+  }
+  .agendar-form-card button {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  .horario-form {
+    display: flex;
+    place-items: start;
+  }
+  .horario-form input {
+    width: auto;
+  }
+
+  .agendar-form-card h3 {
+    font-weight: 600;
+    font-size: 20px;
+  }
+  .agendar-form-card h4 {
+    font-weight: 600;
+    font-size: 10px;
+    margin-bottom: 1rem;
+  }
+  .carrito-container i {
+    color: gray;
+  }
+  .carrito-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    min-height: 4rem;
+  }
+  /* MENU --------------------------*/
+  .lamp-bg {
+    content: "";
+    position: absolute;
+    background-image: url(/assets/lamp.png);
+    width: 25rem;
+    height: 27rem;
+    top: 10%;
+    right: 10%;
+    background-position: center;
+    background-size: cover;
+    z-index: -9;
+    /* filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3)); */
+  }
+  .user-badge h4 {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .user-badge {
+    display: flex;
+    align-items: start;
+  }
+  .user-nombre {
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 22px;
+    background: linear-gradient(to right, #06b6d4, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  /* CITA --------------------------*/
+  .cita-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+  .cita-container span {
+    font-weight: 400;
+    color: #2a2d2d;
+  }
+  .cita-container p {
+    font-weight: 400;
+  }
+  .cita-container h4 {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 0.5rem;
+  }
+  .cita-servicios {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .ticket:hover {
+    cursor: pointer;
+    scale: 105%;
+  }
+  .ticket {
+    position: relative;
+    background-color: #000; /* Color del boleto */
+    color: var(--main-color); /* Color del texto */
+    padding: 0.5rem 1rem;
+    overflow: hidden;
+    width: fit-content;
+    height: fit-content;
+    max-width: 100%;
+  }
+
+  .ticket::after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 0.1rem;
+    top: 0;
+    background-color: white;
+    right: 0.4rem;
+  }
+  .ticket::before {
+    content: "";
+    position: absolute;
+    background-color: #000;
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 2px solid white;
+    background-color: white;
+  }
+
+  .ticket::before {
+    margin: 0.5rem 0;
+    left: -0.75rem;
+  }
+  .precio {
+    color: #33b44d;
+  }
+  .servicio-nombre {
+    /* color: #06b6d4; */
+  }
+  /* SERVICIOS --------------------------*/
+  .servicios-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .servicio-card {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+  }
+  .servicio-card button {
+    font-size: 10px;
+  }
+
+  /* CITA --------------------------*/
+  .cita-card {
+    display: flex;
+    background-color: var(--main-color);
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    width: fit-content;
+    max-width: 90%;
+    margin: 0;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+  }
+  .cita-card button {
+    align-self: flex-column-end;
+    margin-top: auto;
+  }
+
+  .citas-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 2rem;
+  }
+  .cita-button-container {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .swal2-loading {
+    display: block;
+    margin: 0 auto;
+    width: 80px;
+    height: 80px;
+  }
+
+  .swal2-loading:after {
+    content: " ";
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid #000;
+    border-color: #000 transparent #000 transparent;
+    animation: swal2-loading-spin 1.2s linear infinite;
+  }
+
+  @keyframes swal2-loading-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  /* ACERCA DE ------------------------- */
+  .acercade-images-container {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+    place-content: center;
+  }
+  .acercade-images-container div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .acercade-images-container img {
+    height: 100%;
+    width: 100%;
+    max-width: 16rem;
+  }
+  /* NOSOTROS ------------------------- */
+  .nosotros-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  /* testimoniales ------------------------- */
+  .testimoniales-container h3 {
+    text-align: center;
+    margin: 1rem;
+  }
+  .testimoniales-container {
+    min-height: 18rem;
+  }
+  /*CONFIRM EMAIL -----------------------*/
+  .confirm-message {
+    font-size: 30px;
+    font-weight: 700;
+  }
+  .red-gradient {
+    background: linear-gradient(to right, #ff0000, #ff4d4d, #ff9999);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  /* ADMIN ------------------------- */
+  .admin-citas-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .admin-citas-container h3 {
+    margin-bottom: 1rem;
+  }
+  .fecha-group h3 {
+    font-weight: 700;
+    font-size: 18px;
+  }
+  .fecha-group-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .admin-cita-card {
+    display: flex;
+    background-color: var(--main-color);
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    width: fit-content;
+    max-width: 24%;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.5);
+  }
+  .admin-cita-card span {
+    font-weight: 400;
+  }
+  .admin-cita-card p {
+    font-weight: 800;
+    font-size: 12px;
+  }
+  /* FOOTER ------------------------- */
+
+  .footer-container {
+    background-color: black;
+    color: white;
+    height: 30vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size: 16px;
+  }
+
+  .footer-column {
+    flex: 1;
+    min-width: 200px;
+    margin: 1rem;
+  }
+
+  .footer-column h4 {
+    margin-bottom: 1rem;
+  }
+
+  .footer-column p,
+  .footer-column a {
+    margin: 0.5rem 0;
+    color: gray;
+  }
+
+  .footer-column a {
+    text-decoration: none;
+  }
+
+  .footer-column a:hover {
+    text-decoration: underline;
+  }
 }
 /* 3XL */
 @media (min-width: 1780px) {
   .container {
     max-width: 1780px;
+  }
+  :root {
+    --app-width: 60%;
+  }
+  .app-container {
+    width: var(--app-width);
+    margin: var(--app-margin);
+  }
+  /* ELEMENTS--------------------------*/
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: var(--title-font);
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  input {
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 8px;
+    outline: none;
+    width: 80%;
+    margin-left: 1rem;
+    /* border-radius: var(--border-radius); */
+  }
+
+  input:focus {
+    border-bottom-color: black;
+    transition: 0.3s;
+  }
+
+  section h3 {
+    font-size: 16px;
+  }
+  section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  button:hover {
+    cursor: pointer;
+    scale: 102%;
+    transition: 0.1s ease-in-out;
+  }
+  /* GENERAL ----------------------------- */
+  .button {
+    padding: 0.4rem;
+    width: fit-content;
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    text-transform: uppercase;
+    font-size: 10px;
+  }
+  .button-black {
+    background-color: #000;
+  }
+  .button-green {
+    background-color: #0fa968;
+  }
+  .button-blue {
+    background-color: #1e7dd9;
+  }
+  .button-red {
+    background-color: #e22d20;
+  }
+  /* FORM --------------------------*/
+  .create-form-card form {
+    width: 20rem;
+  }
+  .create-form-card {
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    width: fit-content;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+  }
+  .login-form-card {
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    width: fit-content;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  form div {
+    display: flex;
+    gap: 0.2rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .form-password-container {
+    /* display: flex;
+    gap: 1rem; */
+  }
+  /* NAVBAR --------------------------*/
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1rem 0;
+  }
+  .navlist-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+  .logo-tijeras {
+    /* aspect-ratio: 3 / 2; */
+    width: 1rem;
+  }
+  .logo-container {
+    display: flex;
+    gap: 0.2rem;
+    justify-content: center;
+    align-items: center;
+  }
+  /* HEADER --------------------------*/
+  .header-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+  }
+  .header-container p,
+  .header-container button {
+    margin-bottom: 0.5rem;
+    margin-left: 0.5rem;
+  }
+
+  .header-title {
+    text-align: left;
+    font-size: 45px;
+  }
+  .header-image-container {
+    position: relative;
+    margin-left: 1rem;
+  }
+  .header-image-container::after {
+    content: "";
+    position: absolute;
+    background-image: url(/assets/water.png);
+    width: 30rem;
+    height: 30rem;
+    top: -35%;
+    left: -30%;
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
+  }
+
+  .header-image {
+    width: 18rem;
+    transform: rotate(-20deg);
+  }
+  /* CREATE ACC --------------------------*/
+  .items-bg {
+    content: "";
+    position: absolute;
+    background-image: url(/assets/items-2.png);
+    width: 15rem;
+    height: 15rem;
+    top: 20%;
+    left: 20%;
+    background-position: center;
+    background-size: cover;
+    z-index: -3;
+  }
+  /* LOGIN --------------------------*/
+  .silla-bg {
+    content: "";
+    position: absolute;
+    background-image: url(/assets/silla.png);
+    width: 25rem;
+    height: 25rem;
+    top: 20%;
+    left: 18%;
+    background-position: center;
+    background-size: cover;
+    z-index: -3;
+    /* filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3)); */
+  }
+  /* AGENDAR --------------------------*/
+  .agendar-form-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    width: fit-content;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+  }
+  .agendar-form-card button {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  .horario-form {
+    display: flex;
+    place-items: start;
+  }
+  .horario-form input {
+    width: auto;
+  }
+
+  .agendar-form-card h3 {
+    font-weight: 600;
+    font-size: 20px;
+  }
+  .agendar-form-card h4 {
+    font-weight: 600;
+    font-size: 10px;
+    margin-bottom: 1rem;
+  }
+  .carrito-container i {
+    color: gray;
+  }
+  .carrito-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    min-height: 4rem;
+  }
+  /* MENU --------------------------*/
+  .lamp-bg {
+    content: "";
+    position: absolute;
+    background-image: url(/assets/lamp.png);
+    width: 25rem;
+    height: 27rem;
+    top: 10%;
+    right: 10%;
+    background-position: center;
+    background-size: cover;
+    z-index: -9;
+    /* filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3)); */
+  }
+  .user-badge h4 {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .user-badge {
+    display: flex;
+    align-items: start;
+  }
+  .user-nombre {
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 22px;
+    background: linear-gradient(to right, #06b6d4, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  /* CITA --------------------------*/
+  .cita-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+  .cita-container span {
+    font-weight: 400;
+    color: #2a2d2d;
+  }
+  .cita-container p {
+    font-weight: 400;
+  }
+  .cita-container h4 {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 0.5rem;
+  }
+  .cita-servicios {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .ticket:hover {
+    cursor: pointer;
+    scale: 105%;
+  }
+  .ticket {
+    position: relative;
+    background-color: #000; /* Color del boleto */
+    color: var(--main-color); /* Color del texto */
+    padding: 0.5rem 1rem;
+    overflow: hidden;
+    width: fit-content;
+    height: fit-content;
+    max-width: 100%;
+  }
+
+  .ticket::after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 0.1rem;
+    top: 0;
+    background-color: white;
+    right: 0.4rem;
+  }
+  .ticket::before {
+    content: "";
+    position: absolute;
+    background-color: #000;
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 2px solid white;
+    background-color: white;
+  }
+
+  .ticket::before {
+    margin: 0.5rem 0;
+    left: -0.75rem;
+  }
+  .precio {
+    color: #33b44d;
+  }
+  .servicio-nombre {
+    /* color: #06b6d4; */
+  }
+  /* SERVICIOS --------------------------*/
+  .servicios-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .servicio-card {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+  }
+  .servicio-card button {
+    font-size: 10px;
+  }
+
+  /* CITA --------------------------*/
+  .cita-card {
+    display: flex;
+    background-color: var(--main-color);
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    width: fit-content;
+    max-width: 90%;
+    margin: 0;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+  }
+  .cita-card button {
+    align-self: flex-column-end;
+    margin-top: auto;
+  }
+
+  .citas-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin-top: 2rem;
+  }
+  .cita-button-container {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .swal2-loading {
+    display: block;
+    margin: 0 auto;
+    width: 80px;
+    height: 80px;
+  }
+
+  .swal2-loading:after {
+    content: " ";
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid #000;
+    border-color: #000 transparent #000 transparent;
+    animation: swal2-loading-spin 1.2s linear infinite;
+  }
+
+  @keyframes swal2-loading-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  /* ACERCA DE ------------------------- */
+  .acercade-images-container {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+    place-content: center;
+  }
+  .acercade-images-container div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .acercade-images-container img {
+    height: 100%;
+    width: 100%;
+    max-width: 16rem;
+  }
+  /* NOSOTROS ------------------------- */
+  .nosotros-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  /* testimoniales ------------------------- */
+  .testimoniales-container h3 {
+    text-align: center;
+    margin: 1rem;
+  }
+  .testimoniales-container {
+    min-height: 18rem;
+  }
+  /*CONFIRM EMAIL -----------------------*/
+  .confirm-message {
+    font-size: 30px;
+    font-weight: 700;
+  }
+  .red-gradient {
+    background: linear-gradient(to right, #ff0000, #ff4d4d, #ff9999);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  /* ADMIN ------------------------- */
+  .admin-citas-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .admin-citas-container h3 {
+    margin-bottom: 1rem;
+  }
+  .fecha-group h3 {
+    font-weight: 700;
+    font-size: 18px;
+  }
+  .fecha-group-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .admin-cita-card {
+    display: flex;
+    background-color: var(--main-color);
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    width: fit-content;
+    max-width: 24%;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.5);
+  }
+  .admin-cita-card span {
+    font-weight: 400;
+  }
+  .admin-cita-card p {
+    font-weight: 800;
+    font-size: 12px;
+  }
+  /* FOOTER ------------------------- */
+
+  .footer-container {
+    background-color: black;
+    color: white;
+    height: 30vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size: 16px;
+  }
+
+  .footer-column {
+    flex: 1;
+    min-width: 200px;
+    margin: 1rem;
+  }
+
+  .footer-column h4 {
+    margin-bottom: 1rem;
+  }
+
+  .footer-column p,
+  .footer-column a {
+    margin: 0.5rem 0;
+    color: gray;
+  }
+
+  .footer-column a {
+    text-decoration: none;
+  }
+
+  .footer-column a:hover {
+    text-decoration: underline;
   }
 }
