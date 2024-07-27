@@ -83,7 +83,7 @@ app.get("/confirmar-email", async (req, res) => {
     if (result.length > 0) {
       const user = result[0];
       await pool.query(`UPDATE usuarios SET confirmado = 1`, [user.id]);
-      res.status(200).json({ message: "Email confirmado" });
+      res.status(200).json({ message: "Email confirmado!" });
       await pool.query(`UPDATE usuarios SET token = NULL WHERE id = ?`, [
         user.id,
       ]);
@@ -107,7 +107,9 @@ app.post("/crear-cuenta", async (req, res) => {
 
     if (existingUser.length > 0) {
       // return console.log(existingUser)
-      return res.status(400).json({ message: "Este mail ya esta registrado, inicia sesión" });
+      return res
+        .status(400)
+        .json({ message: "Este mail ya esta registrado, inicia sesión" });
     }
 
     const token = generateToken();

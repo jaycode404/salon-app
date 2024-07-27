@@ -4,23 +4,23 @@ export default function Footer() {
   return (
     <footer className="footer-container">
       <div className="footer-column">
-        <h4>Contact Us</h4>
+        <h4>Contáctanos</h4>
         <p>Email: <a href="mailto:info@salon.com">info@salon.com</a></p>
-        <p>Phone: <a href="tel:+1234567890">+1 234 567 890</a></p>
+        <p>Teléfono: <a href="tel:+1234567890">+1 234 567 890</a></p>
       </div>
       <div className="footer-column">
-        <h4>Location</h4>
-        <p>123 Beauty St.</p>
-        <p>Salon City, SC 12345</p>
+        <h4>Ubicación</h4>
+        <p>Calle Belleza 123</p>
+        <p>Ciudad del Salón, SC 12345</p>
       </div>
       <div className="footer-column">
-        <h4>Hours of Operation</h4>
-        <p>Monday - Friday: 9am - 6pm</p>
-        <p>Saturday: 10am - 4pm</p>
-        <p>Sunday: Closed</p>
+        <h4>Horario de Atención</h4>
+        <p>Lunes - Viernes: 9am - 6pm</p>
+        <p>Sábado: 10am - 4pm</p>
+        <p>Domingo: Cerrado</p>
       </div>
       <div className="footer-column">
-        <h4>Follow Us</h4>
+        <h4>Síguenos</h4>
         <p><a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></p>
         <p><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></p>
         <p><a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a></p>

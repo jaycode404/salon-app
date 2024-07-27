@@ -42,34 +42,38 @@ export default function AdminPanel() {
 
   const citasPorFecha = agruparCitasPorFecha(allCitas);
   return (
-    <div>
+    <section>
       <h2>Admin Panel</h2>
-      <div className="citas-container">
+      <div className="admin-citas-container">
         {Object.keys(citasPorFecha).map((fecha) => (
           <div key={fecha} className="fecha-group">
             <h3>{fecha}</h3>
-            {citasPorFecha[fecha].map((cita) => {
-              const { hora } = formatoFechaHora(cita.fecha, cita.hora);
-              return (
-                <div key={cita.id} className="cita-card">
-                  <p>HORA: {hora}</p>
-                  <p>
-                    CLIENTE: {cita.nombre} {cita.apellido}
-                  </p>
-                  <p>Telefono: {cita.telefono}</p>
-                  <button
-                    onClick={() => {
-                      cancelarCita(cita.id);
-                    }}
-                  >
-                    Cancelar Cita
-                  </button>
-                </div>
-              );
-            })}
+
+            <div className="fecha-group-container">
+              {citasPorFecha[fecha].map((cita) => {
+                const { hora } = formatoFechaHora(cita.fecha, cita.hora);
+                return (
+                  <div key={cita.id} className="cita-card">
+                    <p>HORA: {hora}</p>
+                    <p>
+                      CLIENTE: {cita.nombre} {cita.apellido}
+                    </p>
+                    <p>Telefono: {cita.telefono}</p>
+                    <button
+                      className="button button-red"
+                      onClick={() => {
+                        cancelarCita(cita.id);
+                      }}
+                    >
+                      Cancelar Cita
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }

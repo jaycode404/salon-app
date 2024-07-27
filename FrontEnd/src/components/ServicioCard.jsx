@@ -6,7 +6,7 @@ export default function ServicioCard({ servicio, addCarrito, quitar }) {
 
   useEffect(() => {
     const parentElem = cardRef.current?.parentElement;
-    if (parentElem && parentElem.classList.contains("carrito-container")) {
+    if (parentElem && parentElem.classList.contains("carrito-box")) {
       setParentCarrito(true);
     }
   }, []);
@@ -19,12 +19,13 @@ export default function ServicioCard({ servicio, addCarrito, quitar }) {
         addCarrito(servicio.id);
       }}
     >
-      <p>{servicio.nombre}</p>
-      <p>${servicio.precio}</p>
-
+      <div>
+        <p>{servicio.nombre || servicio.servicioNombre}</p>
+        <p>${servicio.precio || servicio.servicioPrecio}</p>
+      </div>
       {parentCarrito && (
         <div>
-          <button
+          <button className="button button-red"
             onClick={() => {
               quitar(servicio.id);
             }}

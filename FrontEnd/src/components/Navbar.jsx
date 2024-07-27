@@ -6,7 +6,7 @@ import { GeneralContext } from "../context/GeneralContext";
 export const NavList = () => {
   const logged = ["Menu", "Agendar Cita", "Acerca De"];
   const admin = ["Menu", "Agendar Cita", "Admin"];
-  const noLogged = ["Iniciar Sesión", "Crear Cuenta", "Acerca de"];
+  const noLogged = ["LogIn", "Crear Cuenta", "Acerca de"];
   const navigate = useNavigate();
   const { user, logOut } = useContext(GeneralContext);
 

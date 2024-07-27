@@ -67,7 +67,7 @@ export default function CreateAccount() {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Usuario registrado!",
+          title: "Usuario registrado! ",
           text: "Revisa tu email para confirmar tu cuenta e inicia sesion..",
           showConfirmButton: true,
         });

@@ -2,12 +2,21 @@ import React, { useContext, useEffect, useState } from "react";
 import ServicioCard from "./ServicioCard";
 import { GeneralContext } from "../context/GeneralContext";
 import Swal from "sweetalert2";
-import { parse, isAfter } from "date-fns";
-import { useNavigate } from "react-router-dom";
+import { parse, isAfter, getDay, format } from "date-fns";
+import { useLocation, useNavigate } from "react-router-dom";
 const initialForm = {
   fecha: "",
   hora: "",
   usuarioId: "",
+};
+const horarioAtencion = {
+  0: { dia: "Lunes", inicio: "09:00", fin: "18:00" },
+  1: { dia: "Martes", inicio: "09:00", fin: "18:00" },
+  2: { dia: "Miércoles", inicio: "09:00", fin: "18:00" },
+  3: { dia: "Jueves", inicio: "09:00", fin: "18:00" },
+  4: { dia: "Viernes", inicio: "09:00", fin: "18:00" },
+  5: { dia: "Sábado", inicio: "10:00", fin: "16:00" },
+  6: { dia: "Domingo", inicio: "10:00", fin: "16:00" },
 };
 
 export default function Agendar() {
@@ -18,11 +27,46 @@ export default function Agendar() {
   const [form, setForm] = useState(initialForm);
   const { user, loading } = useContext(GeneralContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  const { cita } = location.state || {};
+
   //FORMATEAR FECHA////////////////////////////
   const formatFecha = (fecha) => {
     const [year, month, day] = fecha.split("-");
     return `${year}-${month}-${day}`;
   };
+  //FORMATEAR FECHA////////////////////////////
+  useEffect(() => {
+    const formatDate = (date) => {
+      return date.split("T")[0];
+    };
+
+    if (cita) {
+      console.log(cita);
+      const citaDate = formatDate(cita.fecha);
+      setForm({
+        fecha: citaDate,
+        hora: cita.hora,
+      });
+      const serviciosTemp = [];
+      cita.servicios.map((servicio) => {
+        serviciosTemp.push(servicio.servicioId);
+        console.log(servicio.servicioId);
+      });
+
+      const serviciosBox = [];
+      cita.servicios.map((servicio) => {
+        serviciosBox.push(servicio);
+        console.log(carritoBox);
+      });
+
+      setCarrito(serviciosTemp);
+      setCarritoBox(serviciosBox);
+
+      console.log(carritoBox);
+      console.log(carrito);
+    }
+  }, []);
   //get cita a comparar///////////////////////////
   const getCitas = async (fecha) => {
     try {
@@ -46,6 +90,29 @@ export default function Agendar() {
     }
   };
 
+  //VALIDAR HORARIO DE ATENCION //////////////
+  const validarHorarioAtencion = (fecha, hora) => {
+    const diaSemana = getDay(new Date(fecha));
+    console.log("dia:", diaSemana);
+    const horario = horarioAtencion[diaSemana];
+    console.log("horario:", horario);
+
+    if (horario.dia === "Domingo") {
+      return false;
+    }
+    const [horaInicioHoras, horaInicioMinutos] = horario.inicio
+      .split(":")
+      .map(Number);
+    const [horaFinHoras, horaFinMinutos] = horario.fin.split(":").map(Number);
+    const [formHoraHoras, formHoraMinutos] = hora.split(":").map(Number);
+    const formHoraEnMinutos = formHoraHoras * 60 + formHoraMinutos;
+    const inicioEnMinutos = horaInicioHoras * 60 + horaInicioMinutos;
+    const finEnMinutos = horaFinHoras * 60 + horaFinMinutos;
+
+    return (
+      formHoraEnMinutos >= inicioEnMinutos && formHoraEnMinutos <= finEnMinutos
+    );
+  };
   //VALIDAR HORARIO///////////////////////////
   const validarHorario = async (fecha, hora) => {
     const formatedFecha = formatFecha(fecha);
@@ -98,9 +165,9 @@ export default function Agendar() {
     const fechaSeleccionada = parse(fecha, "yyyy-MM-dd", new Date());
     const ahora = new Date();
     ahora.setHours(0, 0, 0, 0);
-    fechaSeleccionada.setHours(5, 5, 5, 5);
+    fechaSeleccionada.setHours(1, 0, 0, 0);
     if (isAfter(fechaSeleccionada, ahora)) {
-      console.log("Fecha válida");
+      // console.log("Fecha válida");
       return true;
     } else {
       console.log("Fecha no válida");
@@ -134,6 +201,7 @@ export default function Agendar() {
 
     if (name === "fecha") {
       const fechaValidada = fechaValida(value);
+      const diaAtencion = validarHorarioAtencion(value, "10:00");
       if (fechaValidada === false) {
         Swal.fire({
           icon: "error",
@@ -141,6 +209,12 @@ export default function Agendar() {
           text: "La fecha seleccionada es anterior a hoy.",
         });
         return;
+      } else if (diaAtencion === false) {
+        Swal.fire({
+          icon: "error",
+          title: "Fecha no válida",
+          text: "La fecha seleccionada no esta en horario de servicio.",
+        });
       }
     }
 
@@ -151,6 +225,10 @@ export default function Agendar() {
           value
         );
         const horaValidada = horaValida(form.fecha, value);
+        const horarioAtencionValidado = validarHorarioAtencion(
+          form.fecha,
+          value
+        );
         if (horarioOcupado) {
           Swal.fire({
             icon: "error",
@@ -162,6 +240,12 @@ export default function Agendar() {
             icon: "error",
             title: "Selecciona una hora válida",
             text: "Esta hora es anterior a la actual...",
+          });
+        } else if (!horarioAtencionValidado) {
+          Swal.fire({
+            icon: "error",
+            title: "Fuera del horario de atención",
+            text: "Elige una hora dentro del horario de atención...",
           });
         } else {
           Swal.fire({
@@ -176,25 +260,48 @@ export default function Agendar() {
   //handleSubmit///////////////////////////////
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const horaValidada = horaValida(form.hora);
+    const { horarioOcupado, proximaHoraDisponible } = await validarHorario(
+      form.fecha,
+      form.hora
+    );
+
     if (!carrito.length > 0) {
       Swal.fire({
         title: "Agrega al menos un servicio al carrito",
         icon: "warning",
       });
       return;
-    } else if (form.fecha === "") {
+    } else if (
+      form.fecha === "" ||
+      !fechaValida(form.fecha) ||
+      !validarHorarioAtencion(form.fecha, "10:00")
+    ) {
       Swal.fire({
-        title: "Debes seleccionar una fecha",
+        title: "Debes seleccionar una fecha válida",
         icon: "warning",
       });
       return;
-    } else if (form.hora === "") {
+    } else if (
+      form.hora === "" ||
+      !horaValida(form.fecha, form.hora) ||
+      !validarHorarioAtencion(form.fecha, form.hora)
+    ) {
       Swal.fire({
-        title: "Debes seleccionar una hora",
+        title: "Debes seleccionar una hora válida",
         icon: "warning",
+      });
+      return;
+    } else if (horarioOcupado) {
+      Swal.fire({
+        title: "Hora no disponible",
+        icon: "warning",
+        text: `Esta hora está ocupada, la hora más próxima disponible es ${proximaHoraDisponible}.`,
       });
       return;
     }
+
     try {
       //POST EN CITAS/////////////////////////
       const response = await fetch("http://localhost:3000/crear-cita", {

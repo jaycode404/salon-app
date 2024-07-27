@@ -1,9 +1,17 @@
 import React, { useContext } from "react";
 import { GeneralContext } from "../context/GeneralContext";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 export default function CitaCard({ cita, formatFecha }) {
   const { cancelarCita } = useContext(GeneralContext);
   const horaFormateada = cita.hora.split(":").slice(0, 2).join(":");
+  const navigate = useNavigate();
+
+  const editarCita = (id) => {
+    navigate("/agendar-cita", {state: {cita}})
+    console.log("editando cita", id);
+    
+  };
 
   return (
     <div className="cita-card">
@@ -34,9 +42,17 @@ export default function CitaCard({ cita, formatFecha }) {
             })}
           </div>
         </div>
-       
       </div>
-      <button
+      <div className="cita-button-container">
+        {/* <button
+          className="button button-blue"
+          onClick={() => {
+            editarCita(cita.citaId);
+          }}
+        >
+          editar cita
+        </button> */}
+        <button
           className="button button-red"
           onClick={() => {
             cancelarCita(cita.citaId);
@@ -44,6 +60,7 @@ export default function CitaCard({ cita, formatFecha }) {
         >
           cancelar cita
         </button>
+      </div>
     </div>
   );
 }

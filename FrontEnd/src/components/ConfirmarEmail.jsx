@@ -54,9 +54,21 @@ export default function ConfirmarEmail() {
     confirmarEmail();
   }, []);
   return (
-    <div>
-      <h1>{message}</h1>
-      <Link to="/login">Iniciar sesion</Link>
-    </div>
+    <section>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: ".5rem",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <h1 className={`confirm-message ${message ? 'user-nombre' : 'red-gradient'}`}>{message ? message : 'error en el token'}</h1>
+        <Link to="/login" className="button button-blue">
+          Iniciar sesion
+        </Link>
+      </div>
+    </section>
   );
 }
