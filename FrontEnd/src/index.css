@@ -165,7 +165,7 @@ section {
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-    font-size: 12px;
+    font-size: 10px;
   }
   .logo-tijeras {
     /* aspect-ratio: 3 / 2; */
@@ -1070,13 +1070,13 @@ section {
   /* FOOTER ------------------------- */
 
   .footer-container {
+    display: flex;
+    flex-direction: row;
     color: white;
-    height: 23vh;
+    height: auto;
     background-color: black;
     padding: 1rem;
-    display: flex;
     gap: 0.5rem;
-
     font-size: 10px;
   }
 
@@ -1281,8 +1281,8 @@ section {
     background-image: url(/assets/items-2.png);
     width: 15rem;
     height: 15rem;
-    bottom: 5%;
-    left: 35%;
+    top: 60%;
+    left: 30%;
     background-position: center;
     background-size: cover;
     z-index: -3;
@@ -1294,8 +1294,8 @@ section {
     background-image: url(/assets/silla.png);
     width: 18rem;
     height: 18rem;
-    bottom: 18%;
-    right: 28%;
+    top: 40%;
+    right: 26%;
     background-position: center;
     background-size: cover;
     z-index: -3;
@@ -1517,6 +1517,7 @@ section {
   /* ACERCA DE ------------------------- */
   .acercade-images-container {
     display: flex;
+    flex-direction: row;
     gap: 0.5rem;
     width: 100%;
     place-content: center;
@@ -1806,7 +1807,7 @@ section {
     background-image: url(/assets/items-2.png);
     width: 15rem;
     height: 15rem;
-    bottom: 5%;
+    top: 60%;
     left: 35%;
     background-position: center;
     background-size: cover;
@@ -1819,7 +1820,7 @@ section {
     background-image: url(/assets/silla.png);
     width: 18rem;
     height: 18rem;
-    bottom: 18%;
+    top: 45%;
     right: 28%;
     background-position: center;
     background-size: cover;
@@ -1888,8 +1889,8 @@ section {
   }
   .user-badge {
     display: flex;
-    gap: 1rem;
-    align-items: center;
+    gap: 0.5rem;
+    align-items: start;
   }
   .user-nombre {
     text-transform: uppercase;
@@ -2042,6 +2043,7 @@ section {
   /* ACERCA DE ------------------------- */
   .acercade-images-container {
     display: flex;
+    flex-direction: row;
     gap: 0.5rem;
     width: 100%;
     place-content: center;
@@ -2413,8 +2415,7 @@ section {
   }
   .user-badge {
     display: flex;
-    gap: 1rem;
-    align-items: center;
+    align-items: start;
   }
   .user-nombre {
     text-transform: uppercase;
@@ -2427,7 +2428,7 @@ section {
   /* CITA --------------------------*/
   .cita-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 1rem;
   }
   .cita-container span {
@@ -2517,7 +2518,8 @@ section {
     padding: 1rem;
     border-radius: var(--border-radius);
     width: fit-content;
-    max-width: 31%;
+    max-width: 90%;
+    margin: 0;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
   }
   .cita-card button {
@@ -2640,7 +2642,7 @@ section {
   }
   .admin-cita-card p {
     font-weight: 800;
-    font-size: 14px;
+    font-size: 12px;
   }
   /* FOOTER ------------------------- */
 
@@ -2648,10 +2650,11 @@ section {
     background-color: black;
     color: white;
     height: 30vh;
-    display: grid;
-    gap: 1rem;
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
+    font-size: 16px;
   }
 
   .footer-column {
