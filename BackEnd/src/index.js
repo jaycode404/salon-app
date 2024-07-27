@@ -195,18 +195,45 @@ app.get("/admin", async (req, res) => {
   try {
     const [result] = await pool.query(`
          SELECT
-          citas.id,
+          citas.id AS citaId,
           citas.fecha,
           citas.hora,
           usuarios.nombre,
           usuarios.apellido,
-          usuarios.telefono
+          usuarios.telefono,
+          servicios.id AS servicioId,
+          servicios.nombre AS servicioNombre,
+          servicios.precio AS servicioPrecio
           FROM citas
           INNER JOIN usuarios ON citas.usuarioId = usuarios.id 
+          INNER JOIN citasservicios ON citas.id = citasservicios.citaId
+          INNER JOIN servicios ON citasservicios.servicioId = servicios.id
       `);
-    res.status(200).json(result);
+
+    const citasMap = {};
+    result.forEach((row) => {
+      if (!citasMap[row.citaId]) {
+        citasMap[row.citaId] = {
+          id: row.citaId,
+          fecha: row.fecha,
+          hora: row.hora,
+          nombre: row.nombre,
+          apellido: row.apellido,
+          telefono: row.telefono,
+          servicios: [],
+        };
+      }
+
+      citasMap[row.citaId].servicios.push({
+        id: row.servicioId,
+        nombre: row.servicioNombre,
+        precio: row.servicioPrecio,
+      });
+    });
+    const citas = Object.values(citasMap)
+    res.status(200).json(citas);
   } catch (err) {
-    res.status(400).send({ message: "" });
+    res.status(400).send({ message: err.message });
   }
 });
 //MENU ////////////////////////////
