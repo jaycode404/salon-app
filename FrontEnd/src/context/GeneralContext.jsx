@@ -7,7 +7,7 @@ const GeneralProvider = ({ children }) => {
   const [citas, setCitas] = useState([]);
   const [allCitas, setAllCitas] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const dbUrl = import.meta.env.VITE_DB_URL;
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -102,12 +102,9 @@ const GeneralProvider = ({ children }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await fetch(
-            `http://localhost:3000/eliminar-cita/${id}`,
-            {
-              method: "DELETE",
-            }
-          );
+          const response = await fetch(`${dbUrl}/eliminar-cita/${id}`, {
+            method: "DELETE",
+          });
           if (response.ok) {
             Swal.fire({
               title: "Cita cancelada!",
@@ -147,6 +144,7 @@ const GeneralProvider = ({ children }) => {
   };
 
   const data = {
+    dbUrl,
     loading,
     user,
     setUser,

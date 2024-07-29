@@ -12,8 +12,8 @@ import { PORT } from "./config.js";
 ///////////////////////////////////////////
 app.use(
   cors({
-    origin: "http://localhost:5173",
-    credentials: true,
+    origin:
+      "mysql://root:QKODgLOTeIeaAAuFPINKIQvGvooFqSUC@mysql.railway.internal:3306/railway",
   })
 );
 app.use(express.json());

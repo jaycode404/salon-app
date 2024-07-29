@@ -8,11 +8,11 @@ export const NavList = () => {
   const admin = ["Menu", "Agendar Cita", "Admin"];
   const noLogged = ["LogIn", "Crear Cuenta", "Acerca de"];
   const navigate = useNavigate();
-  const { user, logOut } = useContext(GeneralContext);
+  const { user, logOut, dbUrl } = useContext(GeneralContext);
 
   const handleCerrarSesion = async () => {
     try {
-      await fetch("http://localhost:3000/logout", {
+      await fetch(`${dbUrl}/logout`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,

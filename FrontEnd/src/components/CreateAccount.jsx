@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { GeneralContext } from "../context/GeneralContext";
 const formInitial = {
   nombre: "",
   apellido: "",
@@ -14,7 +15,7 @@ export default function CreateAccount() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-
+  const { dbUrl } = useContext(GeneralContext);
   //validar numero ///////////////////////////
   const validatePhone = (phone) => {
     const phoneRegex = /^\d{10}$/;
@@ -54,7 +55,7 @@ export default function CreateAccount() {
 
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:3000/crear-cuenta", {
+      const response = await fetch(`${dbUrl}}/crear-cuenta`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

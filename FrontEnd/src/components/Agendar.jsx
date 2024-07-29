@@ -4,6 +4,8 @@ import { GeneralContext } from "../context/GeneralContext";
 import Swal from "sweetalert2";
 import { parse, isAfter, getDay, format } from "date-fns";
 import { useLocation, useNavigate } from "react-router-dom";
+const dbUrl = import.meta.env.VITE_DB_URL;
+
 const initialForm = {
   fecha: "",
   hora: "",
@@ -25,10 +27,13 @@ export default function Agendar() {
   const [carritoBox, setCarritoBox] = useState([]);
   let [total, setTotal] = useState(0);
   const [form, setForm] = useState(initialForm);
-  const { user, loading } = useContext(GeneralContext);
+  const { user, loading, dbUrl } = useContext(GeneralContext);
   const navigate = useNavigate();
   const location = useLocation();
   const { cita } = location.state || {};
+  useEffect(() => {
+    console.log(dbUrl);
+  }, []);
 
   //FORMATEAR FECHA////////////////////////////
   const formatFecha = (fecha) => {
@@ -70,7 +75,7 @@ export default function Agendar() {
   //get cita a comparar///////////////////////////
   const getCitas = async (fecha) => {
     try {
-      const response = await fetch(`http://localhost:3000/citas/${fecha}`, {
+      const response = await fetch(`${dbUrl}/citas/${fecha}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -304,7 +309,7 @@ export default function Agendar() {
 
     try {
       //POST EN CITAS/////////////////////////
-      const response = await fetch("http://localhost:3000/crear-cita", {
+      const response = await fetch(`${dbUrl}/crear-cita`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -332,16 +337,13 @@ export default function Agendar() {
       };
 
       //POST EN CITASERVICIOS//////////////////
-      const responseServicios = await fetch(
-        "http://localhost:3000/citasservicios",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(dataCitaServicios),
-        }
-      );
+      const responseServicios = await fetch(`${dbUrl}/citasservicios`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataCitaServicios),
+      });
 
       if (!responseServicios.ok) {
         throw new Error("error al insertar servicios");
@@ -365,7 +367,7 @@ export default function Agendar() {
   ///get SERVICIOS /////////////////////////////
   useEffect(() => {
     const getServicios = async () => {
-      const respuesta = await fetch("http://localhost:3000/servicios", {
+      const respuesta = await fetch(`${dbUrl}/servicios`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });

@@ -11,7 +11,7 @@ const formInitial = {
 export default function Login() {
   const [form, setForm] = useState(formInitial);
   const navigate = useNavigate();
-  const { user, logIn, loading } = useContext(GeneralContext);
+  const { user, logIn, loading, dbUrl } = useContext(GeneralContext);
 
   //handleChange
   const handleChange = (e) => {
@@ -31,7 +31,7 @@ export default function Login() {
     const password = form.password;
     console.log(email, password);
     try {
-      const response = await fetch("http://localhost:3000/login", {
+      const response = await fetch(`${dbUrl}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -93,7 +93,9 @@ export default function Login() {
             <label htmlFor="password">Password:</label>
             <input onChange={handleChange} type="password" name="password" />
           </div>
-          <button className="button button-blue" type="submit">Iniciar Sesión</button>
+          <button className="button button-blue" type="submit">
+            Iniciar Sesión
+          </button>
         </form>
       </div>
     </section>

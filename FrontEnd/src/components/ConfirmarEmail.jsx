@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import confetti from "canvas-confetti";
+import { GeneralContext } from "../context/GeneralContext";
 export default function ConfirmarEmail() {
   const [message, setMessage] = useState("");
   const location = useLocation();
-
+  const { dbUrl } = useContext(GeneralContext);
   const confirmarEmail = async () => {
     const queryParams = new URLSearchParams(window.location.search);
     const token = queryParams.get("token");
@@ -14,15 +15,12 @@ export default function ConfirmarEmail() {
       return;
     }
     try {
-      const response = await fetch(
-        `http://localhost:3000/confirmar-email?token=${token}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`${dbUrl}/confirmar-email?token=${token}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const data = await response.json();
       if (response.ok) {
         setMessage(data.message || "Inicia sesion");
@@ -64,7 +62,13 @@ export default function ConfirmarEmail() {
           alignItems: "center",
         }}
       >
-        <h1 className={`confirm-message ${message ? 'user-nombre' : 'red-gradient'}`}>{message ? message : 'error en el token'}</h1>
+        <h1
+          className={`confirm-message ${
+            message ? "user-nombre" : "red-gradient"
+          }`}
+        >
+          {message ? message : "error en el token"}
+        </h1>
         <Link to="/login" className="button button-blue">
           Iniciar sesion
         </Link>
