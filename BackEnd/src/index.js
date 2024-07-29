@@ -362,5 +362,5 @@ app.delete("/eliminar-cita/:id", async (req, res) => {
 //LISTEN////////////////////////////
 app.listen(PORT, () => {
   // console.log(`escuchando  en el puerto ${port}`);
-  console.log(`conectado...`);
+  console.log(`conectado...`, PORT);
 });
