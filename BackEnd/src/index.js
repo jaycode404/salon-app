@@ -12,8 +12,8 @@ import { PORT } from "./config.js";
 ///////////////////////////////////////////
 app.use(
   cors({
-    origin:
-      "mysql://root:QKODgLOTeIeaAAuFPINKIQvGvooFqSUC@mysql.railway.internal:3306/railway",
+    origin: "https://salon-app-production.up.railway.app/",
+    credentials: true,
   })
 );
 app.use(express.json());
