@@ -12,7 +12,7 @@ import { PORT } from "./config.js";
 ///////////////////////////////////////////
 app.use(
   cors({
-    origin: "https://salon-app-production.up.railway.app/",
+    origin: "https://salon-app-mu.vercel.app/",
     credentials: true,
   })
 );
