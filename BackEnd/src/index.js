@@ -8,7 +8,7 @@ import { pool } from "./db.js";
 import cors from "cors";
 import { ca } from "date-fns/locale";
 const app = express();
-const port = 3000;
+import { PORT } from "./config.js";
 ///////////////////////////////////////////
 app.use(
   cors({
@@ -230,7 +230,7 @@ app.get("/admin", async (req, res) => {
         precio: row.servicioPrecio,
       });
     });
-    const citas = Object.values(citasMap)
+    const citas = Object.values(citasMap);
     res.status(200).json(citas);
   } catch (err) {
     res.status(400).send({ message: err.message });
@@ -359,7 +359,7 @@ app.delete("/eliminar-cita/:id", async (req, res) => {
   }
 });
 //LISTEN////////////////////////////
-app.listen(port, () => {
+app.listen(PORT, () => {
   // console.log(`escuchando  en el puerto ${port}`);
   console.log(`conectado...`);
 });
