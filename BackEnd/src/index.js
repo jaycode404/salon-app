@@ -2,7 +2,7 @@ import express from "express";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import mysql from "mysql2";
 import { pool } from "./db.js";
 import cors from "cors";
