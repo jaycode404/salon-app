@@ -8,7 +8,7 @@ import { pool } from "./db.js";
 import cors from "cors";
 import { ca } from "date-fns/locale";
 const app = express();
-import { DB_PORT } from "./config.js";
+import { PORT } from "./config.js";
 ///////////////////////////////////////////
 const corsOptions = {
   origin: 'https://salon-app-mu.vercel.app',
@@ -360,7 +360,7 @@ app.delete("/eliminar-cita/:id", async (req, res) => {
   }
 });
 //LISTEN////////////////////////////
-app.listen(DB_PORT, () => {
+app.listen(PORT, () => {
   // console.log(`escuchando  en el puerto ${port}`);
   console.log(`conectado...`);
 });
