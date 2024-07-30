@@ -19,7 +19,7 @@ import { PORT } from "./config.js";
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://salon-app-mu.vercel.app",
+    origin: "*",
   })
 );
 
