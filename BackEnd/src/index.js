@@ -8,7 +8,7 @@ import { pool } from "./db.js";
 import cors from "cors";
 import { ca } from "date-fns/locale";
 const app = express();
-import { DB_NAME, DB_PORT } from "./config.js";
+import { DB_NAME, DB_PORT, PORT } from "./config.js";
 ///////////////////////////////////////////
 const corsOptions = {
   origin: "https://salon-app-frontend-steel.vercel.app",
