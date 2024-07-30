@@ -358,6 +358,12 @@ app.delete("/eliminar-cita/:id", async (req, res) => {
     res.status(500).send({ message: "Error al eliminar la cita" });
   }
 });
+
+//prueba/////////////////////////////
+app.get('/prueba', (req,res) => {
+  res.send({ message: 'desde prueba, conectada'})
+  console.log('funcionando')
+})
 //LISTEN/////////////////////////////
 app.listen(PORT, () => {
   // console.log(`escuchando  en el puerto ${port}`);
