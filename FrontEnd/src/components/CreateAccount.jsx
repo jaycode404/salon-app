@@ -55,7 +55,7 @@ export default function CreateAccount() {
 
     try {
       setLoading(true);
-      const response = await fetch(`${dbUrl}}/crear-cuenta`, {
+      const response = await fetch(`${dbUrl}/crear-cuenta`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
