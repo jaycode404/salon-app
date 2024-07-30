@@ -11,7 +11,7 @@ const app = express();
 import {DB_NAME, PORT } from "./config.js";
 ///////////////////////////////////////////
 const corsOptions = {
-  origin: "https://salon-app-mu.vercel.app",
+  origin: "https://salon-app-frontend-steel.vercel.app",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
 };
