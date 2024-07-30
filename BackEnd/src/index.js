@@ -360,14 +360,21 @@ app.delete("/eliminar-cita/:id", async (req, res) => {
 });
 
 //prueba/////////////////////////////
-app.get("/prueba", (req, res) => {
+app.get("/prueba", async (req, res) => {
   try {
-    const [result] = pool.query(`SELECT * FROM usuarios`);
+    // Ejecuta la consulta SQL y espera el resultado
+    const [result] = await pool.query(`SELECT * FROM usuarios`);
 
-    res.send({ result });
+    // Envía la respuesta con los resultados
+    res.send(result);
     console.log("funcionando");
-  } catch (err) {}
+  } catch (err) {
+    // Envía una respuesta de error y registra el error en consola
+    console.error("Error en la consulta:", err);
+    res.status(500).send({ message: "Error en la consulta" });
+  }
 });
+
 //LISTEN/////////////////////////////
 app.listen(PORT, () => {
   // console.log(`escuchando  en el puerto ${port}`);
