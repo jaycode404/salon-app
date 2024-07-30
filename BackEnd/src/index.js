@@ -11,7 +11,7 @@ const app = express();
 import { PORT } from "./config.js";
 ///////////////////////////////////////////
 const corsOptions = {
-  origin: "https://salon-app-git-main-jays-projects-44862942.vercel.app",
+  origin: "https://salon-app-mu.vercel.app/",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
   allowedHeaders: "Content-Type,Authorization",
