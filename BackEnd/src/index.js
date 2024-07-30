@@ -16,12 +16,12 @@ import { PORT } from "./config.js";
 //   // credentials: true,
 //   // allowedHeaders: "Content-Type,Authorization",
 // };
-app.use(express.json());
 app.use(
   cors({
     origin: "*",
   })
 );
+app.use(express.json());
 
 //KEYS//////////////////////////////////
 const SECRET_KEY = "shinji01asuka02rei00kaworu13misato08";
