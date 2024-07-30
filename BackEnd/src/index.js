@@ -5,10 +5,10 @@ import nodemailer from "nodemailer";
 import bcrypt from "bcryptjs";
 import mysql from "mysql2";
 import { pool } from "./db.js";
+import cors from "cors";
 import { ca } from "date-fns/locale";
 const app = express();
 import { PORT } from "./config.js";
-import cors from "cors";
 ///////////////////////////////////////////
 const corsOptions = {
   origin: 'https://salon-app-mu.vercel.app',
@@ -16,9 +16,9 @@ const corsOptions = {
   credentials: true,
   allowedHeaders: 'Content-Type,Authorization'
 };
-
 app.use(cors(corsOptions));
 app.use(express.json());
+
 //KEYS//////////////////////////////////
 const SECRET_KEY = "shinji01asuka02rei00kaworu13misato08";
 const REFRESH_SECRET_KEY = "gendo01misato02ryoji03ritsuko04kaji05";
