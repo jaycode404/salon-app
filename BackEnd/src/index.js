@@ -12,7 +12,7 @@ import { PORT } from "./config.js";
 ///////////////////////////////////////////
 const corsOptions = {
   origin: "https://salon-app-mu.vercel.app",
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  // methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
 };
 app.use(cors(corsOptions));
