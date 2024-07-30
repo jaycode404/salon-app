@@ -15,7 +15,7 @@ const corsOptions = {
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
 };
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 //KEYS//////////////////////////////////
@@ -363,7 +363,10 @@ app.delete("/eliminar-cita/:id", async (req, res) => {
 app.get("/prueba", async (req, res) => {
   try {
     const [rows] = await pool.query("SELECT 1 + 1 AS solution");
-    console.log("La conexión a la base de datos funciona correctamente:", rows[0].solution);
+    console.log(
+      "La conexión a la base de datos funciona correctamente:",
+      rows[0].solution
+    );
   } catch (err) {
     console.error("Error al conectar a la base de datos:", err);
   }
