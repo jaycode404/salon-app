@@ -28,9 +28,9 @@ function App() {
           {/* PRIVATE//////////////////// */}
           {/* ADMIN PANEL//////////////////// */}
           <Route element={<AdminRoute />}>
-            <Route path="/admin" element={<AdminPanel />} />
           </Route>
           {/* ADMIN PANEL//////////////////// */}
+            <Route path="/admin" element={<AdminPanel />} />
           <Route path="/" element={<Home />} exact />
           <Route path="/acerca-de" element={<AcercaDe />} />
           <Route path="/crear-cuenta" element={<CreateAccount />} />
