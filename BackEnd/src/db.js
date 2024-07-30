@@ -4,6 +4,6 @@ export const pool = createPool({
   host: "monorail.proxy.rlwy.net",
   port: 32340,
   user: "root",
-  password: "cqufjoYjagdBkKqcVefYPgLsbxyiPFXd",
+  password: "root",
   database: "railway",
 });
