@@ -371,6 +371,9 @@ app.get("/prueba", async (req, res) => {
     console.error("Error al conectar a la base de datos:", err);
   }
 });
+app.get('/', (req, res) => {
+  res.send('Hello, world!');
+});
 
 //LISTEN/////////////////////////////
 app.listen(PORT, () => {
