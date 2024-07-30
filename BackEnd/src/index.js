@@ -375,5 +375,5 @@ app.get("/prueba", async (req, res) => {
 //LISTEN/////////////////////////////
 app.listen(DB_PORT, () => {
   // console.log(`escuchando  en el puerto ${port}`);
-  console.log(`conectado...`, DB_NAME, PORT);
+  console.log(`conectado...`, DB_NAME, DB_PORT);
 });
