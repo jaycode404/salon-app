@@ -12,7 +12,7 @@ import { PORT } from "./config.js";
 ///////////////////////////////////////////
 const corsOptions = {
   origin: "https://salon-app-mu.vercel.app",
-  // methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
 };
 app.use(cors(corsOptions));
@@ -360,10 +360,10 @@ app.delete("/eliminar-cita/:id", async (req, res) => {
 });
 
 //prueba/////////////////////////////
-app.get('/prueba', (req,res) => {
-  res.send({ message: 'desde prueba, conectada'})
-  console.log('funcionando')
-})
+app.get("/prueba", (req, res) => {
+  res.send({ message: "desde prueba, conectada" });
+  console.log("funcionando");
+});
 //LISTEN/////////////////////////////
 app.listen(PORT, () => {
   // console.log(`escuchando  en el puerto ${port}`);
