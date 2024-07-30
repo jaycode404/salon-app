@@ -14,8 +14,8 @@ const corsOptions = {
   origin: 'https://salon-app-mu.vercel.app',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
+  allowedHeaders: 'Content-Type,Authorization'
 };
-
 app.use(cors(corsOptions));
 app.use(express.json());
 
