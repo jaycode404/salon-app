@@ -7,7 +7,7 @@ const GeneralProvider = ({ children }) => {
   const [citas, setCitas] = useState([]);
   const [allCitas, setAllCitas] = useState([]);
   const [loading, setLoading] = useState(true);
-  const dbUrl = import.meta.env.VITE_BACKEND_HOST;
+  const dbUrl = import.meta.env.VITE_BACKEND_HOST || 'http://localhost:3000';
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
