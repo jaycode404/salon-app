@@ -10,17 +10,12 @@ import { ca } from "date-fns/locale";
 const app = express();
 import { PORT } from "./config.js";
 ///////////////////////////////////////////
-// const corsOptions = {
-//   origin: "https://salon-app-mu.vercel.app",
-//   // methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//   // credentials: true,
-//   // allowedHeaders: "Content-Type,Authorization",
-// };
-app.use(
-  cors({
-    origin: "*",
-  })
-);
+const corsOptions = {
+  origin: "https://salon-app-mu.vercel.app",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 
 //KEYS//////////////////////////////////

@@ -30,7 +30,7 @@ export default function Footer() {
             <a
               href="https://facebook.com"
               target="_blank"
-              rel="noopener noreferrer"
+              
             >
               Facebook
             </a>
@@ -39,7 +39,7 @@ export default function Footer() {
             <a
               href="https://instagram.com"
               target="_blank"
-              rel="noopener noreferrer"
+              
             >
               Instagram
             </a>
@@ -48,7 +48,7 @@ export default function Footer() {
             <a
               href="https://twitter.com"
               target="_blank"
-              rel="noopener noreferrer"
+              
             >
               Twitter
             </a>
