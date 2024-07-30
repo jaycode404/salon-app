@@ -8,7 +8,7 @@ import { pool } from "./db.js";
 import cors from "cors";
 import { ca } from "date-fns/locale";
 const app = express();
-import { PORT } from "./config.js";
+import {DB_NAME, PORT } from "./config.js";
 ///////////////////////////////////////////
 const corsOptions = {
   origin: "https://salon-app-mu.vercel.app",
@@ -367,5 +367,5 @@ app.get("/prueba", (req, res) => {
 //LISTEN/////////////////////////////
 app.listen(PORT, () => {
   // console.log(`escuchando  en el puerto ${port}`);
-  console.log(`conectado...`, PORT);
+  console.log(`conectado...`,DB_NAME, PORT);
 });
