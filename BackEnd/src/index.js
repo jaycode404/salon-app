@@ -19,15 +19,6 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
-// Middleware adicional para verificar y configurar headers de CORS
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://salon-app-mu.vercel.app');
-  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  next();
-});
-
 //KEYS//////////////////////////////////
 const SECRET_KEY = "shinji01asuka02rei00kaworu13misato08";
 const REFRESH_SECRET_KEY = "gendo01misato02ryoji03ritsuko04kaji05";
