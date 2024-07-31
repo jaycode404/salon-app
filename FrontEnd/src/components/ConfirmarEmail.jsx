@@ -7,7 +7,7 @@ export default function ConfirmarEmail() {
   const location = useLocation();
   const { dbUrl } = useContext(GeneralContext);
   const confirmarEmail = async () => {
-    const queryParams = new URLSearchParams(window.location.search);
+    const queryParams = new URLSearchParams(location.search); 
     const token = queryParams.get("token");
 
     if (!token) {
