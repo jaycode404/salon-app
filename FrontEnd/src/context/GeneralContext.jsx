@@ -21,7 +21,7 @@ const GeneralProvider = ({ children }) => {
 
   const getCitas = async () => {
     try {
-      const res = await fetch("http://localhost:3000/menu", {
+      const res = await fetch(`${dbUrl}/menu`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
