@@ -9,7 +9,9 @@ import cors from "cors";
 import { ca } from "date-fns/locale";
 const app = express();
 import { PORT } from "./config.js";
+
 ///////////////////////////////////////////
+const backUrl = "https://salon-app-production.up.railway.app"
 const frontUrl = "https://salon-app-frontend-steel.vercel.app";
 const corsOptions = {
   origin: frontUrl,
@@ -61,7 +63,7 @@ const sendConfirmationEmail = async (userEmail, token) => {
     from: "jaycode404@gmail.com",
     to: userEmail,
     subject: "Confirma tu Email",
-    text: `Gracias por registrarte, por favor confirma tu email haciendo click en el siguiente enlace: ${frontUrl}/confirmar-email?token=${token}`,
+    text: `Gracias por registrarte, por favor confirma tu email haciendo click en el siguiente enlace: ${dbUrl}/confirmar-email?token=${token}`,
   };
 
   try {

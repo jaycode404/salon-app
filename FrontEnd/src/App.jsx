@@ -21,7 +21,6 @@ function App() {
         <Routes>
           {/* PRIVATE//////////////////// */}
           <Route element={<PrivateRoutes />}>
-            
             <Route path="/menu" element={<Menu />} />
             <Route path="/agendar-cita" element={<Agendar />} />
           </Route>
@@ -48,7 +47,7 @@ const Home = () => {
   return (
     <div>
       <Header />
-      <Nosotros/>
+      <Nosotros />
     </div>
   );
 };
