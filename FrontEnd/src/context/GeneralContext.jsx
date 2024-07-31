@@ -7,7 +7,7 @@ const GeneralProvider = ({ children }) => {
   const [citas, setCitas] = useState([]);
   const [allCitas, setAllCitas] = useState([]);
   const [loading, setLoading] = useState(true);
-  const dbUrl = import.meta.env.VITE_BACKEND_HOST || 'http://localhost:3000';
+  const dbUrl = import.meta.env.VITE_BACKEND_HOST || "http://localhost:3000";
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -51,7 +51,7 @@ const GeneralProvider = ({ children }) => {
     // console.log("trayendo todas las citas");
 
     try {
-      const response = await fetch("http://localhost:3000/admin", {
+      const response = await fetch(`${dbUrl}/admin`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
