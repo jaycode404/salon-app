@@ -130,32 +130,6 @@ const GeneralProvider = ({ children }) => {
     });
   };
 
-  const confirmarEmail = async () => {
-    const queryParams = new URLSearchParams(window.location.search);
-    const token = queryParams.get("token");
-
-    if (!token) {
-      setMessage("Link de confirmacion Invalido");
-      return;
-    }
-    try {
-      const response = await fetch(`${dbUrl}/confirmar-email?token=${token}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-      if (response.ok) {
-        setMessage(data.message || "Inicia sesion");
-        showConfetti();
-      } else {
-        setMessage(data.message || "Error al confirmar email");
-      }
-    } catch (err) {
-      setMessage("Error al conectar al servidor");
-    }
-  };
   const logIn = (dataSesion) => {
     localStorage.setItem("user", JSON.stringify(dataSesion.user));
     localStorage.setItem("accessToken", dataSesion.accessToken);
@@ -184,7 +158,6 @@ const GeneralProvider = ({ children }) => {
     allCitas,
     getAllCitas,
     setAllCitas,
-    confirmarEmail
   };
 
   return (
