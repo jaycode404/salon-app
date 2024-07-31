@@ -5,14 +5,25 @@ import {
   MYSQLPASSWORD,
   MYSQLUSER,
   MYSQLHOST,
+  MYSQL_URL,
 } from "./config.js";
+const databaseUrl = new URL(MYSQL_URL);
+
 export const pool = createPool({
-  host: MYSQLHOST,
-  user: MYSQLUSER,
-  password: MYSQLPASSWORD,
-  database: MYSQLDATABASE,
-  port: MYSQLPORT,
+  host: databaseUrl.hostname,
+  user: databaseUrl.username,
+  password: databaseUrl.password,
+  database: databaseUrl.pathname.substring(1),
+  port: databaseUrl.port || 3306,
 });
+
+// export const pool = createPool({
+//   host: MYSQLHOST,
+//   user: MYSQLUSER,
+//   password: MYSQLPASSWORD,
+//   database: MYSQLDATABASE,
+//   port: MYSQLPORT,
+// });
 // export const pool = createPool({
 //   host: DB_HOST,
 //   user: DB_USER,
