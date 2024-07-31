@@ -6,8 +6,11 @@ import {
   MYSQLUSER,
   MYSQLHOST,
   MYSQL_URL,
+  MYSQL_PUBLIC_URL
+
 } from "./config.js";
-const databaseUrl = new URL(MYSQL_URL);
+const databaseUrl = new URL(MYSQL_PUBLIC_URL
+);
 
 export const pool = createPool({
   host: databaseUrl.hostname,
