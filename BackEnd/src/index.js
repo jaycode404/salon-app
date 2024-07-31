@@ -367,6 +367,7 @@ app.get("/prueba", async (req, res) => {
       "La conexión a la base de datos funciona correctamente:",
       rows[0].solution
     );
+    res.send(rows)
   } catch (err) {
     console.error("Error al conectar a la base de datos:", err);
   }
