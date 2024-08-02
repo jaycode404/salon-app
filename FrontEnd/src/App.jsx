@@ -13,7 +13,9 @@ import AdminRoute from "./components/AdminRoute";
 import ConfirmarEmail from "./components/ConfirmarEmail";
 import Footer from "./components/Footer";
 import Nosotros from "./components/Nosotros";
-import EmailConfirmado from "./components/EmailConfirmado";
+import ConfirmarEmailExito from "./components/ConfirmarEmailExito";
+import ConfirmarEmailError from "./components/ConfirmarEmailError";
+
 function App() {
   return (
     <>
@@ -35,7 +37,9 @@ function App() {
           <Route path="/acerca-de" element={<AcercaDe />} />
           <Route path="/crear-cuenta" element={<CreateAccount />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/confirmar-email/:token" element={<ConfirmarEmail />} />
+          <Route path="/confirmar-email" element={<ConfirmarEmail />} />
+          <Route path="/confirmar-email-exito" element={<ConfirmarEmailExito />} />
+          <Route path="/confirmar-email-error" element={<ConfirmarEmailError />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>

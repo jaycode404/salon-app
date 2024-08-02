@@ -27,10 +27,11 @@ export default function ConfirmarEmail() {
       });
       const data = await response.json();
       if (response.ok) {
-        // navigate('confirmar-email')
+        navigate('confirmar-email-exito')
         setMessage(data.message || "Inicia sesion");
         showConfetti();
       } else {
+        navigate('confirmar-email-error')
         setMessage(data.message || "Error al confirmar email");
       }
     } catch (err) {
