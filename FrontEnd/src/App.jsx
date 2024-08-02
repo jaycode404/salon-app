@@ -35,7 +35,7 @@ function App() {
           <Route path="/acerca-de" element={<AcercaDe />} />
           <Route path="/crear-cuenta" element={<CreateAccount />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/confirmar-email" element={<ConfirmarEmail />} />
+          <Route path="/confirmar-email/:token" element={<ConfirmarEmail />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
