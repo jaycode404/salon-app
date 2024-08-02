@@ -4,10 +4,9 @@ import confetti from "canvas-confetti";
 import { GeneralContext } from "../context/GeneralContext";
 
 export default function ConfirmarEmail() {
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState("Cargando");
   const location = useLocation();
   const { dbUrl } = useContext(GeneralContext);
-  const navigate = useNavigate();
 
   //////////////////////////////////
   const confirmarEmail = async () => {
@@ -16,6 +15,7 @@ export default function ConfirmarEmail() {
 
     if (!token) {
       setMessage("Link de confirmacion Invalido");
+
       return;
     }
     try {
