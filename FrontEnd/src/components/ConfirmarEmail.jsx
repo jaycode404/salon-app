@@ -27,7 +27,7 @@ export default function ConfirmarEmail() {
       });
       const data = await response.json();
       if (response.ok) {
-        navigate('confirmar-email')
+        // navigate('confirmar-email')
         setMessage(data.message || "Inicia sesion");
         showConfetti();
       } else {
