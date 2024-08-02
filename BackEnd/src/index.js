@@ -63,7 +63,7 @@ const sendConfirmationEmail = async (userEmail, token) => {
     from: "jaycode404@gmail.com",
     to: userEmail,
     subject: "Confirma tu Email",
-    html: `Gracias por registrarte. Por favor, confirma tu email haciendo clic en el siguiente enlace: <a href="${backUrl}/confirmar-email?token=${token}">Confirmar email</a>.`,
+    html: `Gracias por registrarte. Por favor, confirma tu email haciendo clic en el siguiente enlace: <a href="${frontUrl}/confirmar-email?token=${token}">Confirmar email</a>.`,
     /* si no funciona fusionar urls */
   };
 
