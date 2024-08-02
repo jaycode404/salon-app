@@ -13,8 +13,7 @@ import AdminRoute from "./components/AdminRoute";
 import ConfirmarEmail from "./components/ConfirmarEmail";
 import Footer from "./components/Footer";
 import Nosotros from "./components/Nosotros";
-import ConfirmarEmailExito from "./components/ConfirmarEmailExito";
-import ConfirmarEmailError from "./components/ConfirmarEmailError";
+
 
 function App() {
   return (
