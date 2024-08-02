@@ -1,11 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useLocation, Link } from "react-router-dom";
+import {useNavigate, useLocation, Link } from "react-router-dom";
 import confetti from "canvas-confetti";
 import { GeneralContext } from "../context/GeneralContext";
+
 export default function ConfirmarEmail() {
   const [message, setMessage] = useState("");
   const location = useLocation();
   const { dbUrl } = useContext(GeneralContext);
+  const navigate =  useNavigate()
+
+  //////////////////////////////////
   const confirmarEmail = async () => {
     const queryParams = new URLSearchParams(location.search); 
     const token = queryParams.get("token");
@@ -23,6 +27,7 @@ export default function ConfirmarEmail() {
       });
       const data = await response.json();
       if (response.ok) {
+        navigate('confirmar-email')
         setMessage(data.message || "Inicia sesion");
         showConfetti();
       } else {
