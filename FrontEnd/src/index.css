@@ -201,7 +201,7 @@ section {
   .header-image-container::after {
     content: "";
     position: absolute;
-    background-image: url(/assets/water.png);
+    background-image: url(/assets/water.webp);
     width: 10rem;
     height: 10rem;
     top: -25%;
@@ -732,7 +732,7 @@ section {
   .header-image-container::after {
     content: "";
     position: absolute;
-    background-image: url(/assets/water.png);
+    background-image: url(/assets/water.webp);
     width: 10rem;
     height: 10rem;
     top: -25%;
@@ -1260,7 +1260,7 @@ section {
   .header-image-container::after {
     content: "";
     position: absolute;
-    background-image: url(/assets/water.png);
+    background-image: url(/assets/water.webp);
     width: 15rem;
     height: 15rem;
     top: -25%;
@@ -1786,7 +1786,7 @@ section {
   .header-image-container::after {
     content: "";
     position: absolute;
-    background-image: url(/assets/water.png);
+    background-image: url(/assets/water.webp);
     width: 15rem;
     height: 15rem;
     top: -25%;
@@ -2312,7 +2312,7 @@ section {
   .header-image-container::after {
     content: "";
     position: absolute;
-    background-image: url(/assets/water.png);
+    background-image: url(/assets/water.webp);
     width: 30rem;
     height: 30rem;
     top: -35%;
@@ -2839,7 +2839,7 @@ section {
   .header-image-container::after {
     content: "";
     position: absolute;
-    background-image: url(/assets/water.png);
+    background-image: url(/assets/water.webp);
     width: 30rem;
     height: 30rem;
     top: -35%;
@@ -3366,7 +3366,7 @@ section {
   .header-image-container::after {
     content: "";
     position: absolute;
-    background-image: url(/assets/water.png);
+    background-image: url(/assets/water.webp);
     width: 30rem;
     height: 30rem;
     top: -35%;
@@ -3893,7 +3893,7 @@ section {
   .header-image-container::after {
     content: "";
     position: absolute;
-    background-image: url(/assets/water.png);
+    background-image: url(/assets/water.webp);
     width: 30rem;
     height: 30rem;
     top: -35%;
@@ -4420,7 +4420,7 @@ section {
   .header-image-container::after {
     content: "";
     position: absolute;
-    background-image: url(/assets/water.png);
+    background-image: url(/assets/water.webp);
     width: 30rem;
     height: 30rem;
     top: -35%;
