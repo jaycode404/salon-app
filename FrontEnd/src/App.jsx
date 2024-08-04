@@ -37,7 +37,7 @@ function App() {
           <Route path="/crear-cuenta" element={<CreateAccount />} />
           <Route path="/login" element={<Login />} />
           <Route path="/confirmar-email" element={<ConfirmarEmail />} />
-          <Route path="*" element={<Navigate to="/" />} />
+          {/* <Route path="*" element={<Navigate to="/" />} /> */}
         </Routes>
       </div>
       <Footer />
