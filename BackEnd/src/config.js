@@ -7,7 +7,10 @@ export const MYSQLPORT = process.env.MYSQLPORT || 3306;
 export const MYSQL_URL = process.env.MYSQL_URL || "";
 export const MYSQL_PUBLIC_URL
  = process.env.MYSQL_PUBLIC_URL
- || "";
+ || "http://localhost:3000";
+
+
+ 
 // export const PORT = process.env.PORT || 3000;
 // export const DB_HOST = process.env.DB_HOST || "localhost";
 // export const DB_USER = process.env.DB_USER || "root";

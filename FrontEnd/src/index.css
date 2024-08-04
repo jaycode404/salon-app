@@ -222,8 +222,8 @@ section {
     background-image: url(/assets/items-2.png);
     width: 15rem;
     height: 15rem;
-    top: 55%;
-    left: 22%;
+    top: 68%;
+    left: 18%;
     background-position: center;
     background-size: cover;
     z-index: -3;
@@ -235,7 +235,7 @@ section {
     background-image: url(/assets/silla.png);
     width: 18rem;
     height: 18rem;
-    top: 35%;
+    top: 45%;
     right: 14%;
     background-position: center;
     background-size: cover;
