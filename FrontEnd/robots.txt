@@ -1,0 +1,14 @@
+# Bloquear acceso a áreas privadas que no deben ser indexadas
+User-agent: *
+Disallow: /admin/                # Bloquear el panel de administración
+Disallow: /agendar-cita/         # Bloquear la página de agendar citas (si es privada)
+Disallow: /crear-cuenta/         # Bloquear la página de creación de cuenta (si es privada)
+Disallow: /confirmar-email/      # Bloquear la página de confirmación de email (si es privada)
+Disallow: /menu/                 # Bloquear la página de menú (si es privada)
+
+# Permitir acceso a las páginas públicas
+User-agent: *
+Allow: /                         # Permitir acceso a todas las demás rutas
+
+# Sitemap location
+Sitemap: https://salonapp.lat/sitemap.xml
