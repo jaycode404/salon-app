@@ -219,7 +219,7 @@ section {
   .items-bg {
     content: "";
     position: absolute;
-    background-image: url(/assets/items-2.png);
+    background-image: url(/assets/items.webp);
     width: 15rem;
     height: 15rem;
     top: 68%;
@@ -232,7 +232,7 @@ section {
   .silla-bg {
     content: "";
     position: absolute;
-    background-image: url(/assets/silla.png);
+    background-image: url(/assets/silla.webp);
     width: 18rem;
     height: 18rem;
     top: 45%;
@@ -750,7 +750,7 @@ section {
   .items-bg {
     content: "";
     position: absolute;
-    background-image: url(/assets/items-2.png);
+    background-image: url(/assets/items.webp);
     width: 15rem;
     height: 15rem;
     bottom: 5%;
@@ -763,7 +763,7 @@ section {
   .silla-bg {
     content: "";
     position: absolute;
-    background-image: url(/assets/silla.png);
+    background-image: url(/assets/silla.webp);
     width: 18rem;
     height: 18rem;
     bottom: 18%;
@@ -1278,7 +1278,7 @@ section {
   .items-bg {
     content: "";
     position: absolute;
-    background-image: url(/assets/items-2.png);
+    background-image: url(/assets/items.webp);
     width: 15rem;
     height: 15rem;
     top: 60%;
@@ -1291,7 +1291,7 @@ section {
   .silla-bg {
     content: "";
     position: absolute;
-    background-image: url(/assets/silla.png);
+    background-image: url(/assets/silla.webp);
     width: 18rem;
     height: 18rem;
     top: 40%;
@@ -1804,7 +1804,7 @@ section {
   .items-bg {
     content: "";
     position: absolute;
-    background-image: url(/assets/items-2.png);
+    background-image: url(/assets/items.webp);
     width: 15rem;
     height: 15rem;
     top: 60%;
@@ -1817,7 +1817,7 @@ section {
   .silla-bg {
     content: "";
     position: absolute;
-    background-image: url(/assets/silla.png);
+    background-image: url(/assets/silla.webp);
     width: 18rem;
     height: 18rem;
     top: 45%;
@@ -2330,7 +2330,7 @@ section {
   .items-bg {
     content: "";
     position: absolute;
-    background-image: url(/assets/items-2.png);
+    background-image: url(/assets/items.webp);
     width: 15rem;
     height: 15rem;
     top: 20%;
@@ -2343,7 +2343,7 @@ section {
   .silla-bg {
     content: "";
     position: absolute;
-    background-image: url(/assets/silla.png);
+    background-image: url(/assets/silla.webp);
     width: 25rem;
     height: 25rem;
     top: 20%;
@@ -2857,7 +2857,7 @@ section {
   .items-bg {
     content: "";
     position: absolute;
-    background-image: url(/assets/items-2.png);
+    background-image: url(/assets/items.webp);
     width: 15rem;
     height: 15rem;
     top: 20%;
@@ -2870,7 +2870,7 @@ section {
   .silla-bg {
     content: "";
     position: absolute;
-    background-image: url(/assets/silla.png);
+    background-image: url(/assets/silla.webp);
     width: 25rem;
     height: 25rem;
     top: 20%;
@@ -3384,7 +3384,7 @@ section {
   .items-bg {
     content: "";
     position: absolute;
-    background-image: url(/assets/items-2.png);
+    background-image: url(/assets/items.webp);
     width: 15rem;
     height: 15rem;
     top: 20%;
@@ -3397,7 +3397,7 @@ section {
   .silla-bg {
     content: "";
     position: absolute;
-    background-image: url(/assets/silla.png);
+    background-image: url(/assets/silla.webp);
     width: 25rem;
     height: 25rem;
     top: 20%;
@@ -3911,7 +3911,7 @@ section {
   .items-bg {
     content: "";
     position: absolute;
-    background-image: url(/assets/items-2.png);
+    background-image: url(/assets/items.webp);
     width: 15rem;
     height: 15rem;
     top: 20%;
@@ -3924,7 +3924,7 @@ section {
   .silla-bg {
     content: "";
     position: absolute;
-    background-image: url(/assets/silla.png);
+    background-image: url(/assets/silla.webp);
     width: 25rem;
     height: 25rem;
     top: 20%;
@@ -4438,7 +4438,7 @@ section {
   .items-bg {
     content: "";
     position: absolute;
-    background-image: url(/assets/items-2.png);
+    background-image: url(/assets/items.webp);
     width: 15rem;
     height: 15rem;
     top: 20%;
@@ -4451,7 +4451,7 @@ section {
   .silla-bg {
     content: "";
     position: absolute;
-    background-image: url(/assets/silla.png);
+    background-image: url(/assets/silla.webp);
     width: 25rem;
     height: 25rem;
     top: 20%;
