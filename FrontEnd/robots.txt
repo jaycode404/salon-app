@@ -4,5 +4,6 @@ Disallow: /agendar-cita/
 Disallow: /crear-cuenta/
 Disallow: /confirmar-email/
 Disallow: /menu/
+User-agent: *
 Allow: /
 Sitemap: https://salonapp.lat/sitemap.xml
