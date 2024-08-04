@@ -1,3 +1,8 @@
 User-agent: *
-AllOW: /
-AllOW: /acerca-de
+Disallow: /admin/
+Disallow: /agendar-cita/
+Disallow: /crear-cuenta/
+Disallow: /confirmar-email/
+Disallow: /menu/
+Allow: /
+Sitemap: https://salonapp.lat/sitemap.xml
