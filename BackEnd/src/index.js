@@ -12,7 +12,7 @@ import { PORT } from "./config.js";
 
 ///////////////////////////////////////////
 const backUrl = "https://salon-app-production.up.railway.app";
-const frontUrl = "https://barber-template-webapp.vercel.app";
+const frontUrl = "https://www.salonapp.lat";
 const corsOptions = {
   origin: frontUrl,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
